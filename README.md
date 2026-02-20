@@ -2,7 +2,7 @@
 
 Site institucional da **Isa Criativa**, especializada em papelaria personalizada para festas infantis: topos de bolo, caixinhas e muito mais, feitos com carinho e exclusividade.
 
-🌐 **Acesse o site:** [Isa Criativa]([https://isacriativa.github.io](https://jonasnunees.github.io/isacriativa/))
+🌐 **Acesse o site:** https://jonasnunees.github.io/isacriativa/
 
 ---
 
