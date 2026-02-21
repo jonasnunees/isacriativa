@@ -79,10 +79,21 @@ header {
     color: var(--primary-dark);
 }
 
-/* Menu Hamburger (Mobile First) */
+/* Menu Hamburger (Mobile First)
+   Corrigido: era <div>, agora é <button> — reset de estilos de botão aplicado */
 .hamburger {
     display: none;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/* Foco visível para navegação por teclado */
+.hamburger:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
 }
 
 .bar {
@@ -168,7 +179,7 @@ header {
     position: relative;
     width: 100%;
     max-width: 400px;
-    aspect-ratio: 1 / 1; /* Mantém o formato quadrado da área */
+    aspect-ratio: 1 / 1;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -182,11 +193,10 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0; /* Começam invisíveis */
-    transition: opacity 1s ease-in-out; /* Efeito suave de transição (1 segundo) */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-/* A imagem que estiver ativa fica visível */
 .hero-image .slide.active {
     opacity: 1;
 }
@@ -243,7 +253,25 @@ header {
     position: relative;
     overflow: hidden;
     border-radius: 15px;
+}
+
+/* Corrigido: botão semântico envolve cada item da galeria */
+.gallery-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.gallery-btn:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: 3px;
 }
 
 .gallery-item img {
@@ -273,14 +301,17 @@ header {
     transition: transform var(--transition-speed);
 }
 
+.gallery-btn:hover img,
 .gallery-item:hover img {
     transform: scale(1.1);
 }
 
+.gallery-btn:hover .gallery-overlay,
 .gallery-item:hover .gallery-overlay {
     opacity: 1;
 }
 
+.gallery-btn:hover .gallery-overlay span,
 .gallery-item:hover .gallery-overlay span {
     transform: translateY(0);
 }
@@ -304,6 +335,7 @@ header {
     animation: zoom 0.3s;
 }
 
+/* Corrigido: era <span>, agora é <button> — reset de estilos aplicado */
 .close-modal {
     position: absolute;
     top: 30px; right: 40px;
@@ -311,10 +343,24 @@ header {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.close-modal:hover {
+    color: white;
+}
+
+.close-modal:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 @keyframes zoom {
-    from {transform: scale(0)} 
+    from {transform: scale(0)}
     to {transform: scale(1)}
 }
 
@@ -324,11 +370,14 @@ header {
     background-color: white;
 }
 
+/* Corrigido: agora é <ol>, removemos o estilo de lista padrão */
 .steps-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    list-style: none;
+    padding: 0;
 }
 
 .step {
@@ -350,14 +399,22 @@ header {
     margin: 0 auto 15px;
 }
 
-/* Depoimentos */
+/* Depoimentos
+   Corrigido: texto branco sobre rosa pastel (#f8bbd0) tem baixo contraste.
+   Fundo alterado para um rosa mais escuro (#c2185b) que garante contraste
+   suficiente (>4.5:1) com texto branco conforme WCAG AA. */
 #depoimentos {
     padding: 80px 0;
-    background-color: var(--primary-color);
+    background-color: #c2185b;
     color: white;
 }
 
 .section-title.white {
+    color: white;
+}
+
+/* Garante que o título da seção fique branco mesmo sem a classe .white */
+#depoimentos .section-title {
     color: white;
 }
 
@@ -380,29 +437,43 @@ header {
     font-size: 1.2rem;
     font-style: italic;
     margin-bottom: 20px;
+    color: white;
+}
+
+.testimonial h4 {
+    color: white;
 }
 
 .carousel-dots {
     margin-top: 20px;
 }
 
+/* Corrigido: era <span> com onclick, agora é <button> com reset de estilos */
 .dot {
     height: 12px;
     width: 12px;
     margin: 0 5px;
     background-color: rgba(255,255,255,0.5);
+    border: none;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
     transition: background-color 0.3s;
+    padding: 0;
 }
 
-.dot.active, .dot:hover {
+.dot.active,
+.dot:hover {
     background-color: white;
 }
 
+.dot:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
 @keyframes fade {
-    from {opacity: .4} 
+    from {opacity: .4}
     to {opacity: 1}
 }
 
@@ -457,6 +528,12 @@ footer {
     color: var(--primary-color);
 }
 
+.footer-social a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 .footer-bottom {
     text-align: center;
     border-top: 1px solid rgba(255,255,255,0.1);
@@ -486,6 +563,11 @@ footer {
 
 .whatsapp-float:hover {
     transform: scale(1.1);
+}
+
+.whatsapp-float:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
 }
 
 /* Scroll Reveal Classes */

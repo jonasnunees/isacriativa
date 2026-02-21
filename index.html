@@ -5,23 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Isa Criativa - Papelaria personalizada para festas infantis. Topos de bolo e caixinhas exclusivas feitas com muito carinho.">
     <meta name="keywords" content="papelaria personalizada, festa infantil, topo de bolo, caixinhas personalizadas, Isa Criativa">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Compartilhamento em redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Isa Criativa | Papelaria Personalizada para Festas">
+    <meta property="og:description" content="Papelaria personalizada exclusiva, topos de bolo encantadores e caixinhas feitas sob medida para tornar o sonho do seu filho inesquecível.">
+    <meta property="og:image" content="img/img01.png">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Isa Criativa | Papelaria Personalizada para Festas">
+    <meta name="twitter:description" content="Papelaria personalizada exclusiva, topos de bolo encantadores e caixinhas feitas sob medida para tornar o sonho do seu filho inesquecível.">
+    <meta name="twitter:image" content="img/img01.png">
+
     <title>Isa Criativa | Papelaria Personalizada para Festas</title>
-    
+
+    <!-- Schema Markup: Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Isa Criativa",
+      "description": "Papelaria personalizada para festas infantis. Topos de bolo e caixinhas exclusivas feitas com muito carinho.",
+      "telephone": "+5522997493334",
+      "sameAs": [
+        "https://www.instagram.com/isacriativa_personalizados/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+5522997493334",
+        "contactType": "customer service",
+        "availableLanguage": "Portuguese"
+      }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header id="header">
         <div class="container header-content">
-            <div class="logo">Isa Criativa</div>
-            <nav id="nav-menu">
-                <ul class="nav-list">
+            <div class="logo" aria-label="Isa Criativa - Página inicial">Isa Criativa</div>
+            <nav id="nav-menu" aria-label="Menu principal">
+                <ul class="nav-list" role="list">
                     <li><a href="#hero" class="nav-link">Início</a></li>
                     <li><a href="#beneficios" class="nav-link">Diferenciais</a></li>
                     <li><a href="#galeria" class="nav-link">Galeria</a></li>
@@ -29,11 +64,18 @@
                     <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
                 </ul>
             </nav>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <!-- Corrigido: era <div>, agora é <button> com atributos ARIA -->
+            <button
+                class="hamburger"
+                id="hamburger"
+                aria-label="Abrir menu de navegação"
+                aria-expanded="false"
+                aria-controls="nav-menu"
+            >
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
         </div>
     </header>
 
@@ -43,46 +85,46 @@
                 <div class="hero-text">
                     <h1>A Magia da Sua Festa Começa Nos Detalhes</h1>
                     <p>Papelaria personalizada exclusiva, topos de bolo encantadores e caixinhas feitas sob medida para tornar o sonho do seu filho inesquecível.</p>
-                    <a href="https://wa.me/5522997493334" target="_blank" class="cta-btn primary-btn">
-                        <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento
+                    <a href="https://wa.me/5522997493334" target="_blank" rel="noopener noreferrer" class="cta-btn primary-btn" aria-label="Solicitar orçamento pelo WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Solicitar Orçamento
                     </a>
                 </div>
-                <div class="hero-image">
-                    <img src="img/img01.png" alt="Caixinha Milk Personalizada" class="slide active">
-                    
-                    <img src="img/img02.png" alt="Caixinha Cone Personalizada" class="slide">
-                    <img src="img/img03.png" alt="Carrossel Personalizado" class="slide">
-                    <img src="img/img04.png" alt="Chuteiras Personalizadas" class="slide">
-                    <img src="img/img05.png" alt="Chuteiras Personalizadas" class="slide">
-                    <img src="img/img06.png" alt="Chuteiras Personalizadas" class="slide">
-                    <img src="img/img07.png" alt="Chuteiras Personalizadas" class="slide">
-                    <img src="img/img08.png" alt="Chuteiras Personalizadas" class="slide">
-                    <img src="img/img09.png" alt="Chuteiras Personalizadas" class="slide">
+                <!-- Slideshow do hero: alt texts únicos e descritivos por imagem -->
+                <div class="hero-image" role="img" aria-label="Galeria de produtos personalizados Isa Criativa">
+                    <img src="img/img01.png" alt="Caixinha Milk personalizada com tema infantil" class="slide active">
+                    <img src="img/img02.png" alt="Caixinha Cone personalizada para festa infantil" class="slide" aria-hidden="true">
+                    <img src="img/img03.png" alt="Carrossel decorativo personalizado para mesa de festa" class="slide" aria-hidden="true">
+                    <img src="img/img04.png" alt="Papelaria personalizada com tema esportivo" class="slide" aria-hidden="true">
+                    <img src="img/img05.png" alt="Kit de papelaria personalizada para festa infantil" class="slide" aria-hidden="true">
+                    <img src="img/img06.png" alt="Caixinha personalizada com acabamento premium" class="slide" aria-hidden="true">
+                    <img src="img/img07.png" alt="Topo de bolo personalizado para festa infantil" class="slide" aria-hidden="true">
+                    <img src="img/img08.png" alt="Caixinhas temáticas personalizadas para lembrança de festa" class="slide" aria-hidden="true">
+                    <img src="img/img09.png" alt="Caixinha Milk com arte exclusiva e personalizada" class="slide" aria-hidden="true">
                 </div>
             </div>
         </section>
 
-        <section id="beneficios" class="reveal">
+        <section id="beneficios" class="reveal" aria-labelledby="beneficios-titulo">
             <div class="container">
-                <h2 class="section-title">Por que escolher a Isa Criativa?</h2>
+                <h2 class="section-title" id="beneficios-titulo">Por que escolher a Isa Criativa?</h2>
                 <div class="benefits-grid">
                     <div class="benefit-card">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
                         <h3>100% Personalizado</h3>
                         <p>Cada detalhe é criado do zero com o tema que você e seu pequeno sonharem.</p>
                     </div>
                     <div class="benefit-card">
-                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-solid fa-heart" aria-hidden="true"></i>
                         <h3>Feito com Carinho</h3>
                         <p>Amor em cada corte e montagem para entregar não apenas papel, mas emoção.</p>
                     </div>
                     <div class="benefit-card">
-                        <i class="fa-solid fa-gem"></i>
+                        <i class="fa-solid fa-gem" aria-hidden="true"></i>
                         <h3>Acabamento Premium</h3>
                         <p>Utilizamos materiais de alta qualidade e impressão impecável de alta resolução.</p>
                     </div>
                     <div class="benefit-card">
-                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star" aria-hidden="true"></i>
                         <h3>Exclusividade</h3>
                         <p>Sua festa será única. Não trabalhamos com modelos engessados de fábrica.</p>
                     </div>
@@ -90,91 +132,114 @@
             </div>
         </section>
 
-        <section id="galeria" class="reveal">
+        <section id="galeria" class="reveal" aria-labelledby="galeria-titulo">
             <div class="container">
-                <h2 class="section-title">Nosso Portfólio de Encantos</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="img/img05.png" alt="Carrossel" class="gallery-img">
-                        <div class="gallery-overlay"><span>Ampliar</span></div>
+                <h2 class="section-title" id="galeria-titulo">Nosso Portfólio de Encantos</h2>
+                <div class="gallery-grid" role="list">
+                    <div class="gallery-item" role="listitem">
+                        <!-- Corrigido: botão envolvendo item para acessibilidade de teclado -->
+                        <button class="gallery-btn" aria-label="Ampliar imagem: Kit de papelaria com carrossel decorativo">
+                            <img src="img/img05.png" alt="Kit de papelaria com carrossel decorativo" class="gallery-img">
+                            <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
+                        </button>
                     </div>
-                    <div class="gallery-item">
-                        <img src="img/img09.png" alt="Caixinha Milk" class="gallery-img">
-                        <div class="gallery-overlay"><span>Ampliar</span></div>
+                    <div class="gallery-item" role="listitem">
+                        <button class="gallery-btn" aria-label="Ampliar imagem: Caixinha Milk personalizada">
+                            <img src="img/img09.png" alt="Caixinha Milk com arte exclusiva e personalizada" class="gallery-img">
+                            <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
+                        </button>
                     </div>
-                    <div class="gallery-item">
-                        <img src="img/img06.png" alt="Caixa Cone" class="gallery-img">
-                        <div class="gallery-overlay"><span>Ampliar</span></div>
+                    <div class="gallery-item" role="listitem">
+                        <button class="gallery-btn" aria-label="Ampliar imagem: Caixinha Cone personalizada">
+                            <img src="img/img06.png" alt="Caixinha Cone com acabamento premium personalizado" class="gallery-img">
+                            <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
+                        </button>
                     </div>
-                    <div class="gallery-item">
-                        <img src="img/img08.png" alt="Chuteiras" class="gallery-img">
-                        <div class="gallery-overlay"><span>Ampliar</span></div>
+                    <div class="gallery-item" role="listitem">
+                        <button class="gallery-btn" aria-label="Ampliar imagem: Caixinhas temáticas personalizadas">
+                            <img src="img/img08.png" alt="Caixinhas temáticas personalizadas para lembrança de festa" class="gallery-img">
+                            <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div id="image-modal" class="modal">
-            <span class="close-modal">&times;</span>
-            <img class="modal-content" id="modal-img">
+        <!-- Modal: corrigido com role, aria-modal, foco gerenciado e botão semântico -->
+        <div
+            id="image-modal"
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Imagem ampliada"
+            aria-hidden="true"
+        >
+            <!-- Corrigido: era <span>, agora é <button> -->
+            <button class="close-modal" id="close-modal-btn" aria-label="Fechar imagem ampliada">&times;</button>
+            <img class="modal-content" id="modal-img" alt="">
         </div>
 
-        <section id="como-funciona" class="reveal">
+        <section id="como-funciona" class="reveal" aria-labelledby="como-funciona-titulo">
             <div class="container">
-                <h2 class="section-title">Como transformar seu sonho em realidade</h2>
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
+                <h2 class="section-title" id="como-funciona-titulo">Como transformar seu sonho em realidade</h2>
+                <ol class="steps-container" aria-label="Passo a passo do pedido">
+                    <li class="step">
+                        <div class="step-number" aria-hidden="true">1</div>
                         <h3>Escolha o Tema</h3>
                         <p>Nos conte a sua ideia, as cores e o tema preferido do seu filho.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
+                    </li>
+                    <li class="step">
+                        <div class="step-number" aria-hidden="true">2</div>
                         <h3>Personalizamos</h3>
                         <p>Criamos a arte, enviamos para aprovação e produzimos com perfeição.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
+                    </li>
+                    <li class="step">
+                        <div class="step-number" aria-hidden="true">3</div>
                         <h3>Você Recebe e Encanta</h3>
                         <p>Pronto! Sua encomenda chega lindamente embalada, pronta para brilhar na mesa.</p>
-                    </div>
-                </div>
+                    </li>
+                </ol>
             </div>
         </section>
 
-        <section id="depoimentos" class="reveal">
+        <section id="depoimentos" class="reveal" aria-labelledby="depoimentos-titulo">
             <div class="container">
-                <h2 class="section-title">O que as mamães dizem</h2>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="testimonial active">
+                <h2 class="section-title" id="depoimentos-titulo">O que as mamães dizem</h2>
+                <div
+                    class="carousel-container"
+                    aria-roledescription="carrossel"
+                    aria-label="Depoimentos de clientes"
+                >
+                    <div class="carousel-track" aria-live="polite" aria-atomic="true">
+                        <div class="testimonial active" role="group" aria-roledescription="slide" aria-label="Depoimento 1 de 3">
                             <p>"A Isa Criativa superou todas as expectativas! As caixinhas do safari do Leo ficaram perfeitas, um capricho sem igual!"</p>
                             <h4>- Mariana Silva</h4>
                         </div>
-                        <div class="testimonial">
+                        <div class="testimonial" role="group" aria-roledescription="slide" aria-label="Depoimento 2 de 3">
                             <p>"Trabalho impecável e atendimento maravilhoso. O topo de bolo foi a sensação da festinha da minha filha."</p>
                             <h4>- Camila Oliveira</h4>
                         </div>
-                        <div class="testimonial">
+                        <div class="testimonial" role="group" aria-roledescription="slide" aria-label="Depoimento 3 de 3">
                             <p>"Tudo muito delicado e embalado com carinho. Dá pra sentir o amor em cada peça. Recomendo de olhos fechados!"</p>
                             <h4>- Amanda Costa</h4>
                         </div>
                     </div>
-                    <div class="carousel-dots">
-                        <span class="dot active" onclick="currentSlide(0)"></span>
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
+                    <!-- Corrigido: eram <span> com onclick, agora são <button> acessíveis -->
+                    <div class="carousel-dots" role="tablist" aria-label="Navegação do carrossel">
+                        <button class="dot active" role="tab" aria-selected="true"  aria-label="Ver depoimento 1" onclick="currentSlide(0)"></button>
+                        <button class="dot"        role="tab" aria-selected="false" aria-label="Ver depoimento 2" onclick="currentSlide(1)"></button>
+                        <button class="dot"        role="tab" aria-selected="false" aria-label="Ver depoimento 3" onclick="currentSlide(2)"></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="cta-final" class="reveal">
+        <section id="cta-final" class="reveal" aria-labelledby="cta-titulo">
             <div class="container cta-final-content">
-                <h2>Vamos planejar uma festa inesquecível juntas?</h2>
+                <h2 id="cta-titulo">Vamos planejar uma festa inesquecível juntas?</h2>
                 <p>Nossa agenda é limitada para garantir o nível de excelência em cada pedido. Reserve sua data agora!</p>
-                <a href="https://wa.me/5522997493334" target="_blank" class="cta-btn secondary-btn">
-                    <i class="fa-brands fa-whatsapp"></i> Quero Reservar Minha Data
+                <a href="https://wa.me/5522997493334" target="_blank" rel="noopener noreferrer" class="cta-btn secondary-btn" aria-label="Reservar data pelo WhatsApp">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Quero Reservar Minha Data
                 </a>
             </div>
         </section>
@@ -183,21 +248,25 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-brand">
-                <div class="logo">Isa Criativa</div>
+                <div class="logo" aria-hidden="true">Isa Criativa</div>
                 <p>Personalizando sonhos em papel.</p>
             </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/isacriativa_personalizados/"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/5522997493334"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
+            <nav class="footer-social" aria-label="Redes sociais">
+                <a href="https://www.instagram.com/isacriativa_personalizados/" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil da Isa Criativa no Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/5522997493334" target="_blank" rel="noopener noreferrer" aria-label="Entrar em contato pelo WhatsApp">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                </a>
+            </nav>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Isa Criativa. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/5522997493334" target="_blank" class="whatsapp-float">
-        <i class="fa-brands fa-whatsapp"></i>
+    <a href="https://wa.me/5522997493334" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar com a Isa Criativa pelo WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <script src="js/script.js"></script>
