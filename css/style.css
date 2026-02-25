@@ -60,6 +60,7 @@ header {
     font-family: var(--font-logo);
     font-size: 1.8rem;
     color: var(--primary-dark);
+    text-decoration: none;
 }
 
 .nav-list {
