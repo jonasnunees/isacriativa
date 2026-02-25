@@ -577,3 +577,52 @@ a.logo:hover {
         font-size: 1.3rem;
     }
 }
+
+/* ===============================
+   CONTADOR DE RESULTADOS
+=============================== */
+
+.blog-counter {
+    margin-bottom: 20px;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+}
+
+/* ===============================
+   BOTÃO CARREGAR MAIS
+=============================== */
+
+.blog-load-more {
+    margin: 40px auto;
+    display: block;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: none;
+    background: var(--primary-dark);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.blog-load-more:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   ANIMAÇÃO SUAVE DOS POSTS
+=============================== */
+
+.blog-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Classe adicionada via JS */
+.blog-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,135 +1,171 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Espera o HTML carregar completamente antes de executar o JavaScript
+document.addEventListener("DOMContentLoaded", function () {
 
-        const searchInput   = document.getElementById('blog-search');
-        const filterBtns    = document.querySelectorAll('.filter-btn, .sidebar-cat-item, .tag');
-        const grid          = document.getElementById('posts-grid');
-        const resultsInfo   = document.getElementById('results-info');
-        const emptyState    = document.getElementById('posts-empty');
-        const featuredPost  = document.querySelector('.post-featured');
+    // ===============================
+    // CONFIGURAÇÕES INICIAIS
+    // ===============================
 
-        // Todos os cards (featured + grid)
-        const allCards = [featuredPost, ...document.querySelectorAll('.post-card')];
+    const POSTS_PER_BATCH = 10;
+    let visibleCount = POSTS_PER_BATCH;
+    let activeCategory = "todos";
+    let searchTimeout;
 
-        // ── Utilitário: atualiza info de resultados ──
-        function updateResultsInfo(visible, query, category) {
-            let text = '';
-            if (query && category !== 'todos') {
-                text = `<strong>${visible} artigos</strong> encontrados para "<strong>${query}</strong>" em <strong>${getCategoryLabel(category)}</strong>`;
-            } else if (query) {
-                text = `<strong>${visible} artigos</strong> encontrados para "<strong>${query}</strong>"`;
-            } else if (category !== 'todos') {
-                text = `Mostrando <strong>${visible} artigos</strong> em <strong>${getCategoryLabel(category)}</strong>`;
-            } else {
-                text = `Mostrando <strong>${visible} artigos</strong>`;
-            }
-            resultsInfo.innerHTML = text;
+    // ===============================
+    // SELEÇÃO DOS ELEMENTOS DO HTML
+    // ===============================
+
+    const grid = document.querySelector(".posts-grid");
+    const allCards = document.querySelectorAll(".post-card");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const searchInput = document.querySelector("#blog-search");
+    const emptyState = document.querySelector("#posts-empty");
+
+    // ===============================
+    // FUNÇÃO PRINCIPAL DE FILTRO
+    // ===============================
+
+    function applyFilters() {
+
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+        let filteredCards = [];
+
+        allCards.forEach(card => {
+            const cardCategory = card.getAttribute("data-category") || "";
+            const cardTitle = card.querySelector(".post-card-title, .post-featured-title, h2")?.textContent.toLowerCase() || "";
+            const cardDesc = card.querySelector(".post-featured-desc")?.textContent.toLowerCase() || "";
+
+            const matchCategory = activeCategory === "todos" || cardCategory === activeCategory;
+            const matchSearch = !query || cardTitle.includes(query) || cardDesc.includes(query);
+
+            if (matchCategory && matchSearch) filteredCards.push(card);
+        });
+
+        // Esconde todos
+        allCards.forEach(card => {
+            card.style.display = "none";
+            card.classList.remove("fade-in");
+        });
+
+        // Exibe somente os visíveis com animação
+        filteredCards.slice(0, visibleCount).forEach((card, index) => {
+            card.style.display = "";
+            setTimeout(() => card.classList.add("fade-in"), index * 60);
+        });
+
+        if (emptyState) {
+            emptyState.style.display = filteredCards.length === 0 ? "flex" : "none";
         }
 
-        function getCategoryLabel(cat) {
-            const labels = {
-                papelaria: 'Papelaria',
-                temas: 'Temas de Festa',
-                decoracao: 'Decoração',
-                dicas: 'Dicas Práticas',
-                local: 'São Pedro da Aldeia',
-                guias: 'Guias Completos',
-            };
-            return labels[cat] || cat;
+        updateCounter(filteredCards.length);
+        renderLoadMore(filteredCards.length);
+    }
+
+    // ===============================
+    // CONTADOR
+    // ===============================
+
+    function updateCounter(totalFiltered) {
+        let counter = document.querySelector(".blog-counter");
+        if (!counter) {
+            counter = document.createElement("p");
+            counter.className = "blog-counter";
+            counter.setAttribute("role", "status");
+            counter.setAttribute("aria-live", "polite");
+            grid.parentNode.insertBefore(counter, grid);
         }
+        const showing = Math.min(visibleCount, totalFiltered);
+        counter.textContent = `Mostrando ${showing} de ${totalFiltered} artigos`;
+    }
 
-        // ── Filtro principal ──
-        let activeCategory = 'todos';
+    // ===============================
+    // BOTÃO CARREGAR MAIS
+    // ===============================
 
-        function applyFilters() {
-            const query = searchInput.value.trim().toLowerCase();
-            let visibleCount = 0;
-
-            allCards.forEach(card => {
-                if (!card) return;
-                const cardCat   = card.getAttribute('data-category') || '';
-                const cardTitle = (card.querySelector('h2') || card.querySelector('.post-featured-title') || {}).textContent?.toLowerCase() || '';
-                const cardDesc  = (card.querySelector('.post-featured-desc') || {}).textContent?.toLowerCase() || '';
-
-                const matchCat   = activeCategory === 'todos' || cardCat === activeCategory;
-                const matchQuery = !query || cardTitle.includes(query) || cardDesc.includes(query);
-
-                const show = matchCat && matchQuery;
-
-                if (card.classList.contains('post-featured')) {
-                    card.style.display = show ? '' : 'none';
-                } else {
-                    card.setAttribute('aria-hidden', show ? 'false' : 'true');
-                }
-
-                if (show) visibleCount++;
-            });
-
-            emptyState.style.display = visibleCount === 0 ? 'flex' : 'none';
-            updateResultsInfo(visibleCount, searchInput.value.trim(), activeCategory);
-        }
-
-        // ── Clique nos filtros (topo + sidebar + tags) ──
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const cat = btn.getAttribute('data-category');
-                activeCategory = cat;
-
-                // Atualiza aria-pressed nos filtros do topo
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    const isActive = b.getAttribute('data-category') === cat;
-                    b.classList.toggle('active', isActive);
-                    b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-                });
-
+    function renderLoadMore(totalFiltered) {
+        let btn = document.querySelector(".blog-load-more");
+        if (!btn) {
+            btn = document.createElement("button");
+            btn.className = "blog-load-more";
+            btn.setAttribute("aria-label", "Carregar mais artigos");
+            grid.parentNode.appendChild(btn);
+            btn.addEventListener("click", function () {
+                visibleCount += POSTS_PER_BATCH;
                 applyFilters();
-
-                // Scroll suave até o grid em mobile
-                if (window.innerWidth < 960) {
-                    document.getElementById('blog-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
             });
-        });
-
-        // ── Busca com debounce ──
-        let searchTimeout;
-        searchInput.addEventListener('input', () => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(applyFilters, 250);
-        });
-
-        // ── Limpa busca com Escape ──
-        searchInput.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                searchInput.value = '';
-                applyFilters();
-            }
-        });
-
-        // ── Scroll Reveal (para cards que entram na tela) ──
-        const reveals = document.querySelectorAll('.reveal');
-        if (reveals.length) {
-            const revealObs = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.08 });
-            reveals.forEach(el => revealObs.observe(el));
         }
 
-        // ── Rastreamento WhatsApp via GTM ──
-        window.dataLayer = window.dataLayer || [];
-        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-            link.addEventListener('click', function () {
-                window.dataLayer.push({
-                    event          : 'whatsapp_click',
-                    event_category : 'Contato',
-                    event_label    : this.getAttribute('aria-label') || 'WhatsApp',
-                    event_location : this.classList.contains('whatsapp-float') ? 'botao_flutuante' : 'blog_sidebar',
-                });
-            });
-        });
+        if (visibleCount >= totalFiltered) {
+            btn.style.display = "none";
+        } else {
+            const remaining = Math.min(POSTS_PER_BATCH, totalFiltered - visibleCount);
+            btn.innerHTML = `<i class="fa-solid fa-arrow-down" aria-hidden="true"></i> Carregar mais ${remaining} artigos`;
+            btn.style.display = "block";
+        }
+    }
 
+    // ===============================
+    // BOTÃO VOLTAR AO TOPO
+    // ===============================
+
+    const backToTopBtn = document.createElement("button");
+    backToTopBtn.className = "back-to-top";
+    backToTopBtn.setAttribute("aria-label", "Voltar ao topo da página");
+    backToTopBtn.title = "Voltar ao topo";
+    backToTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up" aria-hidden="true"></i>';
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener("scroll", function () {
+        backToTopBtn.classList.toggle("visible", window.scrollY > 400);
+    }, { passive: true });
+
+    backToTopBtn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // ===============================
+    // EVENTOS DE FILTRO
+    // ===============================
+
+    function setActiveCategory(category) {
+        activeCategory = category;
+        visibleCount = POSTS_PER_BATCH;
+
+        filterButtons.forEach(btn => {
+            const isActive = btn.getAttribute("data-category") === category;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+
+        applyFilters();
+    }
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+            setActiveCategory(this.getAttribute("data-category"));
+        });
+    });
+
+    document.querySelectorAll(".sidebar-cat-item, .tag").forEach(btn => {
+        btn.addEventListener("click", function () {
+            setActiveCategory(this.getAttribute("data-category"));
+            document.getElementById("artigos")?.scrollIntoView({ behavior: "smooth" });
+        });
+    });
+
+    // ===============================
+    // BUSCA COM DELAY
+    // ===============================
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                visibleCount = POSTS_PER_BATCH;
+                applyFilters();
+            }, 250);
+        });
+    }
+
+    // Inicializa
+    applyFilters();
+});
