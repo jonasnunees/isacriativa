@@ -104,25 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ===============================
-    // BOTÃO VOLTAR AO TOPO
-    // ===============================
-
-    const backToTopBtn = document.createElement("button");
-    backToTopBtn.className = "back-to-top";
-    backToTopBtn.setAttribute("aria-label", "Voltar ao topo da página");
-    backToTopBtn.title = "Voltar ao topo";
-    backToTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up" aria-hidden="true"></i>';
-    document.body.appendChild(backToTopBtn);
-
-    window.addEventListener("scroll", function () {
-        backToTopBtn.classList.toggle("visible", window.scrollY > 400);
-    }, { passive: true });
-
-    backToTopBtn.addEventListener("click", function () {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    // ===============================
     // EVENTOS DE FILTRO
     // ===============================
 
