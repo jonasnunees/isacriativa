@@ -592,3 +592,9 @@ a.logo:hover {
         padding: 32px 22px;
     }
 }
+
+.sidebar-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
