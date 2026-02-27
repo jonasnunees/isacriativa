@@ -11,6 +11,15 @@
     --font-main: 'Nunito', sans-serif;
     --font-logo: 'Pacifico', cursive;
     --transition-speed: 0.3s;
+
+    /* Cores de seções e elementos específicos */
+    --color-depoimentos-bg: #c2185b;
+    --color-cta-start: #ad1457;
+    --color-cta-end: #6a1b9a;
+    --color-whatsapp: #25d366;
+
+    /* Layout */
+    --header-height: 70px;
 }
 
 /* Reset Básico */
@@ -60,7 +69,6 @@ header {
     font-family: var(--font-logo);
     font-size: 1.8rem;
     color: var(--primary-dark);
-    text-decoration: none;
 }
 
 .nav-list {
@@ -148,7 +156,7 @@ header {
 
 /* Hero Section */
 #hero {
-    padding: 120px 0 60px;
+    padding: calc(var(--header-height) + 50px) 0 60px;
     background: linear-gradient(135deg, #fff0f5 0%, #e0f7fa 100%);
 }
 
@@ -244,7 +252,7 @@ header {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 20px;
 }
 
@@ -271,10 +279,13 @@ header {
     outline-offset: 3px;
 }
 
-/* Corrigido: altura explícita para evitar layout shift (CLS) durante carregamento */
+/* Corrigido: uso de aspect-ratio no lugar de height fixa para evitar corte no mobile.
+   A altura fixa de 250px não se adaptava a telas pequenas, causando recorte nas imagens.
+   aspect-ratio mantém proporção consistente em qualquer largura, sem CLS. */
 .gallery-img {
     width: 100%;
-    height: 250px;
+    height: auto;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
@@ -299,17 +310,14 @@ header {
     transition: transform var(--transition-speed);
 }
 
-.gallery-btn:hover img,
 .gallery-item:hover img {
     transform: scale(1.1);
 }
 
-.gallery-btn:hover .gallery-overlay,
 .gallery-item:hover .gallery-overlay {
     opacity: 1;
 }
 
-.gallery-btn:hover .gallery-overlay span,
 .gallery-item:hover .gallery-overlay span {
     transform: translateY(0);
 }
@@ -398,7 +406,7 @@ header {
 /* Depoimentos */
 #depoimentos {
     padding: 80px 0;
-    background-color: #c2185b;
+    background-color: var(--color-depoimentos-bg);
     color: white;
 }
 
@@ -470,7 +478,7 @@ header {
 #cta-final {
     padding: 100px 0;
     text-align: center;
-    background: linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%);
+    background: linear-gradient(135deg, var(--color-cta-start) 0%, var(--color-cta-end) 100%);
 }
 
 .cta-final-content h2 {
@@ -531,12 +539,17 @@ footer {
     color: #ccc;
 }
 
+.footer-privacy-link {
+    color: #ccc;
+    text-decoration: underline;
+}
+
 /* WhatsApp Flutuante */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #25d366;
+    background-color: var(--color-whatsapp);
     color: white;
     width: 60px;
     height: 60px;
@@ -571,12 +584,27 @@ footer {
     transform: translateY(0);
 }
 
-/* ====== MEDIA QUERIES (Desktop) ====== */
-@media (min-width: 768px) {
-    .hamburger {
-        display: none;
+/* Acessibilidade: respeita preferência do sistema por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .modal-content {
+        animation: none;
     }
 
+    .reveal {
+        transition: none;
+    }
+
+    .hero-image .slide {
+        transition: none;
+    }
+
+    .testimonial {
+        animation: none;
+    }
+}
+
+/* ====== MEDIA QUERIES (Desktop) ====== */
+@media (min-width: 768px) {
     .hero-container {
         flex-direction: row;
         text-align: left;
