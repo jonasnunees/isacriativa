@@ -1,3 +1,6 @@
+/* ===================
+   Variáveis
+   =================== */
 :root {
     --primary-color: #f8bbd0;
     --primary-dark: #f06292;
@@ -8,12 +11,37 @@
     --bg-light: #fffcfd;
     --font-main: 'Nunito', sans-serif;
     --font-logo: 'Pacifico', cursive;
+
+    /* Cores específicas da página */
+    --color-star: #ffc107;
+    --color-step-pink-bg: #fce4ec;
+    --color-step-purple-bg: #f3e5f5;
+    --color-step-purple-icon: #8e24aa;
+    --color-step-green-bg: #e8f5e9;
+    --color-step-green-icon: #2e7d32;
+    --color-divider-line: #f0d8e4;
+    --color-google-g: #4285f4;
+    --color-dots-bg: #f5f5f5;
+    --color-dots-icon: #888888;
+    --color-footer-text: #cccccc;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ===================
+   Reset & Base
+   =================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
+/* ===================
+   Body
+   =================== */
 body {
     font-family: var(--font-main);
     background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 50%, #e8eaf6 100%);
@@ -37,7 +65,15 @@ header {
     text-decoration: none;
 }
 
-/* ---- MAIN ---- */
+.logo:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ===================
+   Main
+   =================== */
 main {
     max-width: 480px;
     margin: 0 auto;
@@ -53,7 +89,7 @@ main {
 }
 
 .stars i {
-    color: #FFC107;
+    color: var(--color-star);
     display: inline-block;
     animation: starPop 0.4s ease-out both;
 }
@@ -127,18 +163,18 @@ h1 {
 }
 
 .step-icon.pink {
-    background: #fce4ec;
+    background: var(--color-step-pink-bg);
     color: var(--primary-dark);
 }
 
 .step-icon.purple {
-    background: #f3e5f5;
-    color: #8e24aa;
+    background: var(--color-step-purple-bg);
+    color: var(--color-step-purple-icon);
 }
 
 .step-icon.green {
-    background: #e8f5e9;
-    color: #2e7d32;
+    background: var(--color-step-green-bg);
+    color: var(--color-step-green-icon);
 }
 
 .step-text strong {
@@ -160,7 +196,7 @@ h1 {
     display: inline-flex;
     gap: 4px;
     align-items: center;
-    background: #f5f5f5;
+    background: var(--color-dots-bg);
     border-radius: 8px;
     padding: 5px 10px;
     margin-top: 6px;
@@ -169,7 +205,7 @@ h1 {
 .dots-preview span {
     width: 5px;
     height: 5px;
-    background: #888;
+    background: var(--color-dots-icon);
     border-radius: 50%;
     display: block;
     color: transparent;
@@ -190,7 +226,7 @@ h1 {
     content: '';
     flex: 1;
     height: 1px;
-    background: #f0d8e4;
+    background: var(--color-divider-line);
 }
 
 /* ---- BOTÃO PRINCIPAL ---- */
@@ -220,6 +256,11 @@ h1 {
     box-shadow: 0 10px 28px rgba(240,98,146,0.45);
 }
 
+.cta-btn:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
 .cta-btn .btn-icon {
     width: 28px;
     height: 28px;
@@ -236,7 +277,7 @@ h1 {
     border-radius: 50%;
     font-weight: 900;
     font-size: 1rem;
-    color: #4285F4;
+    color: var(--color-google-g);
     flex-shrink: 0;
 }
 
@@ -265,7 +306,7 @@ h1 {
 /* ---- FOOTER ---- */
 footer {
     background: var(--text-dark);
-    color: #ccc;
+    color: var(--color-footer-text);
     text-align: center;
     padding: 18px;
     font-size: 0.85rem;
@@ -285,3 +326,23 @@ h1 { animation-delay: 0.1s; }
 .instruction-card { animation-delay: 0.3s; }
 .cta-btn { animation-delay: 0.45s; }
 .note { animation-delay: 0.55s; }
+
+/* Acessibilidade: respeita preferência do sistema por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .stars i,
+    .instruction-card,
+    .cta-btn,
+    .note,
+    h1,
+    .subtitle {
+        animation: none;
+    }
+
+    .cta-btn {
+        transition: none;
+    }
+}
