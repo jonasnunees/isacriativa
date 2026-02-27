@@ -4,6 +4,54 @@
    Depende de: css/style.css (variáveis e estilos globais)
    ========================================================== */
 
+/* ===================
+   Variáveis específicas do blog-post
+   =================== */
+:root {
+    --color-post-cta-start: #ad1457;
+    --color-post-cta-end: #6a1b9a;
+    --color-instagram-start: #f09433;
+    --color-instagram-mid1: #e6683c;
+    --color-instagram-mid2: #dc2743;
+    --color-instagram-mid3: #cc2366;
+    --color-instagram-end: #bc1888;
+    --color-whatsapp: #25d366;
+    --color-footer-privacy: #cccccc;
+    --color-faq-border: rgba(240, 98, 146, 0.25);
+    --color-faq-hover: #fff0f5;
+    --color-post-border: rgba(0, 0, 0, 0.07);
+    --color-sidebar-cta-start: #ad1457;
+    --color-sidebar-cta-end: #6a1b9a;
+}
+
+/* ===================
+   Acessibilidade
+   =================== */
+
+/* Utilitário para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Respeita preferência do sistema por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .faq-answer,
+    .faq-question i,
+    .related-card,
+    .share-btn,
+    .btn-instagram {
+        transition: none;
+    }
+}
+
 /* ── Correção: logo usada como <a> herda cor azul e sublinhado
       padrão do navegador — este reset garante o visual correto ── */
 a.logo,
@@ -169,7 +217,7 @@ a.logo:hover {
 /* ── CTA Inline ───────────────────────────────────────────── */
 
 .post-cta-inline {
-    background: linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%);
+    background: linear-gradient(135deg, var(--color-post-cta-start) 0%, var(--color-post-cta-end) 100%);
     border-radius: 18px;
     padding: 32px 30px;
     text-align: center;
@@ -196,7 +244,7 @@ a.logo:hover {
 }
 
 .faq-item {
-    border: 1px solid rgba(240, 98, 146, 0.25);
+    border: 1px solid var(--color-faq-border);
     border-radius: 14px;
     margin-bottom: 14px;
     overflow: hidden;
@@ -221,7 +269,7 @@ a.logo:hover {
 }
 
 .faq-question:hover {
-    background-color: #fff0f5;
+    background-color: var(--color-faq-hover);
 }
 
 .faq-question:focus-visible {
@@ -262,7 +310,7 @@ a.logo:hover {
 #artigos-relacionados {
     margin-top: 54px;
     padding-top: 40px;
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid var(--color-post-border);
 }
 
 #artigos-relacionados h2 {
@@ -334,7 +382,7 @@ a.logo:hover {
 
 #cta-final-post {
     margin-top: 54px;
-    background: linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%);
+    background: linear-gradient(135deg, var(--color-post-cta-start) 0%, var(--color-post-cta-end) 100%);
     border-radius: 22px;
     padding: 42px 36px;
     text-align: center;
@@ -374,7 +422,14 @@ a.logo:hover {
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
-    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-mid1),
+        var(--color-instagram-mid2),
+        var(--color-instagram-mid3),
+        var(--color-instagram-end)
+    );
     color: white;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
@@ -383,6 +438,51 @@ a.logo:hover {
 .btn-instagram:hover {
     transform: translateY(-3px);
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.28);
+}
+
+.btn-instagram:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+/* Header do post — logo e link de voltar */
+.post-header-logo {
+    text-decoration: none;
+}
+
+.post-back-link {
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+/* Widget de Instagram na sidebar do post */
+.sidebar-instagram {
+    text-align: center;
+}
+
+.sidebar-instagram-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.sidebar-instagram .btn-instagram {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+}
+
+/* Botão CTA do sidebar com tamanho reduzido */
+.sidebar-cta-btn {
+    font-size: 0.92rem;
+    padding: 10px 20px;
+}
+
+/* Link de privacidade do footer */
+.footer-privacy-link {
+    color: var(--color-footer-privacy);
+    text-decoration: underline;
 }
 
 /* ── Compartilhamento ─────────────────────────────────────── */
@@ -394,7 +494,7 @@ a.logo:hover {
     flex-wrap: wrap;
     margin-top: 50px;
     padding-top: 30px;
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid var(--color-post-border);
 }
 
 .post-share strong {
@@ -418,12 +518,12 @@ a.logo:hover {
 }
 
 .share-whatsapp {
-    background: #25d366;
+    background: var(--color-whatsapp);
     color: white;
 }
 
 .share-instagram {
-    background: linear-gradient(135deg, #f09433, #bc1888);
+    background: linear-gradient(135deg, var(--color-instagram-start), var(--color-instagram-end));
     color: white;
 }
 
@@ -435,7 +535,7 @@ a.logo:hover {
     gap: 20px;
     margin-top: 50px;
     padding-top: 36px;
-    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid var(--color-post-border);
 }
 
 .post-nav-item {
@@ -493,7 +593,7 @@ a.logo:hover {
 }
 
 .sidebar-cta {
-    background: linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%);
+    background: linear-gradient(135deg, var(--color-sidebar-cta-start) 0%, var(--color-sidebar-cta-end) 100%);
     border: none;
     text-align: center;
 }
