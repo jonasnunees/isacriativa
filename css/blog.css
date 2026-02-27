@@ -1,4 +1,55 @@
-/* ── Correção logo herdando cor azul de link ── */
+/* ===================
+   Variáveis específicas do blog
+   =================== */
+:root {
+    --color-sidebar-cta-start: #ad1457;
+    --color-sidebar-cta-end: #6a1b9a;
+    --color-instagram-start: #f09433;
+    --color-instagram-mid1: #e6683c;
+    --color-instagram-mid2: #dc2743;
+    --color-instagram-mid3: #cc2366;
+    --color-instagram-end: #bc1888;
+    --color-search-border: rgba(240, 98, 146, 0.25);
+    --color-search-focus-shadow: rgba(240, 98, 146, 0.15);
+    --color-footer-privacy: #cccccc;
+    --color-placeholder: #bbbbbb;
+}
+
+/* ===================
+   Utilitários
+   =================== */
+
+/* Texto visível apenas para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Acessibilidade: respeita preferência do sistema por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .post-featured,
+    .post-card,
+    .blog-card,
+    .blog-load-more {
+        transition: none;
+    }
+
+    .blog-card {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ===================
+   Header — correção de herança de cor de link
+   =================== */
 a.logo,
 a.logo:visited,
 a.logo:hover {
@@ -68,7 +119,7 @@ a.logo:hover {
 #blog-search {
     width: 100%;
     padding: 14px 18px 14px 46px;
-    border: 2px solid rgba(240, 98, 146, 0.25);
+    border: 2px solid var(--color-search-border);
     border-radius: 40px;
     font-family: var(--font-main);
     font-size: 1rem;
@@ -80,11 +131,11 @@ a.logo:hover {
 
 #blog-search:focus {
     border-color: var(--primary-dark);
-    box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.15);
+    box-shadow: 0 0 0 3px var(--color-search-focus-shadow);
 }
 
 #blog-search::placeholder {
-    color: #bbb;
+    color: var(--color-placeholder);
 }
 
 /* ══════════════════════════════════════
@@ -436,7 +487,7 @@ a.logo:hover {
 
 /* CTA Sidebar */
 .sidebar-cta {
-    background: linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%);
+    background: linear-gradient(135deg, var(--color-sidebar-cta-start) 0%, var(--color-sidebar-cta-end) 100%);
     border: none;
     text-align: center;
 }
@@ -553,6 +604,70 @@ a.logo:hover {
 .newsletter-form p {
     font-size: 0.83rem;
     color: var(--text-light);
+}
+
+/* Widget de Instagram */
+.sidebar-instagram {
+    text-align: center;
+}
+
+.sidebar-instagram-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-mid1),
+        var(--color-instagram-mid2),
+        var(--color-instagram-mid3),
+        var(--color-instagram-end)
+    );
+    color: white;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+}
+
+.instagram-btn:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 30px;
+}
+
+/* Widget de newsletter/WhatsApp */
+.sidebar-newsletter-text {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+/* Botões do sidebar com tamanho reduzido */
+.sidebar-cta-btn {
+    font-size: 0.92rem;
+    padding: 10px 20px;
+}
+
+.sidebar-newsletter-btn {
+    font-size: 0.88rem;
+    padding: 10px 20px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+/* Link de privacidade do footer */
+.footer-privacy-link {
+    color: var(--color-footer-privacy);
+    text-decoration: underline;
 }
 
 /* ══════════════════════════════════════
