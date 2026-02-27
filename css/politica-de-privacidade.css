@@ -1,3 +1,6 @@
+/* ===================
+   Variáveis
+   =================== */
 :root {
     --primary-dark: #f06292;
     --text-dark: #4a4a4a;
@@ -5,9 +8,33 @@
     --bg-light: #fffcfd;
     --font-main: 'Nunito', sans-serif;
     --font-logo: 'Pacifico', cursive;
+
+    /* Cores específicas da página */
+    --color-footer-bg: #4a4a4a;
+    --color-footer-text: #ccc;
+    --color-hr: #f0e0e8;
+    --color-header-bg: #ffffff;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ===================
+   Reset & Base
+   =================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Acessibilidade: respeita preferência do sistema por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
 
 body {
     font-family: var(--font-main);
@@ -16,8 +43,11 @@ body {
     line-height: 1.8;
 }
 
+/* ===================
+   Header
+   =================== */
 header {
-    background-color: white;
+    background-color: var(--color-header-bg);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     padding: 15px 0;
 }
@@ -42,8 +72,13 @@ header .container {
     font-size: 0.95rem;
 }
 
-.back-link:hover { text-decoration: underline; }
+.back-link:hover {
+    text-decoration: underline;
+}
 
+/* ===================
+   Layout
+   =================== */
 .container {
     width: 90%;
     max-width: 800px;
@@ -54,6 +89,9 @@ main {
     padding: 60px 0 80px;
 }
 
+/* ===================
+   Tipografia
+   =================== */
 h1 {
     font-size: 2.2rem;
     color: var(--primary-dark);
@@ -87,20 +125,35 @@ ul li {
     color: var(--text-dark);
 }
 
+/* ===================
+   Links
+   =================== */
 a {
     color: var(--primary-dark);
 }
 
+a:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ===================
+   Footer
+   =================== */
 footer {
-    background-color: #4a4a4a;
-    color: #ccc;
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
     text-align: center;
     padding: 20px;
     font-size: 0.9rem;
 }
 
+/* ===================
+   Componentes
+   =================== */
 hr {
     border: none;
-    border-top: 1px solid #f0e0e8;
+    border-top: 1px solid var(--color-hr);
     margin: 40px 0;
 }
