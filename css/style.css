@@ -155,57 +155,93 @@ header {
 }
 
 /* Hero Section */
+/* Hero Section — layout full-bleed: imagem da borda esquerda até o texto */
 #hero {
-    padding: calc(var(--header-height) + 50px) 0 60px;
-    background: linear-gradient(135deg, #fff0f5 0%, #e0f7fa 100%);
+    padding: 0;
+    background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 60%, #e0f7fa 100%);
+    overflow: hidden;
+    margin-top: var(--header-height);
 }
 
+/* No mobile: empilhado */
 .hero-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Bloco da imagem: sem padding, toca a borda */
+.hero-image {
+    width: 100%;
+    padding: 30px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.hero-illustration {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 24px rgba(240, 98, 146, 0.18));
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}
+
+/* Bloco do texto */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 24px 50px;
 }
 
 .hero-text h1 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.hero-title-main {
+    display: block;
     color: var(--text-dark);
+    font-weight: 800;
 }
 
-.hero-text p {
-    font-size: 1.1rem;
+.hero-title-accent {
+    display: block;
+    color: var(--primary-dark);
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.hero-desc {
+    font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 30px;
+    margin: 0;
+    line-height: 1.7;
 }
 
-/* Container das imagens do Hero */
-.hero-image {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    aspect-ratio: 1 / 1;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* Configuração de cada imagem do slideshow */
-.hero-image .slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.hero-image .slide.active {
-    opacity: 1;
+.hero-tagline {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 4px 0 8px;
 }
 
 /* Benefícios */
@@ -327,16 +363,24 @@ header {
     display: none;
     position: fixed;
     z-index: 2000;
-    padding-top: 100px;
     left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    padding: 60px 16px 16px;
+}
+
+.modal[style*="display: block"],
+.modal[style*="display:block"] {
+    display: flex !important;
 }
 
 .modal-content {
-    margin: auto;
     display: block;
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
     border-radius: 10px;
     animation: zoom 0.3s;
 }
@@ -604,20 +648,9 @@ footer {
 }
 
 /* ====== MEDIA QUERIES (Desktop) ====== */
+
+/* Layout geral: 2 colunas, steps horizontal e footer — a partir de 768px */
 @media (min-width: 768px) {
-    .hero-container {
-        flex-direction: row;
-        text-align: left;
-    }
-
-    .hero-text, .hero-image {
-        flex: 1;
-    }
-
-    .hero-text h1 {
-        font-size: 3.5rem;
-    }
-
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -635,9 +668,82 @@ footer {
     }
 }
 
+/* Hero com imagem lateral — apenas a partir de 1024px */
 @media (min-width: 1024px) {
+    /* Hero: grid full-bleed — imagem ocupa da borda esquerda até o texto */
+    #hero {
+        min-height: calc(100vh - var(--header-height));
+        display: flex;
+        align-items: stretch;
+    }
+
+    .hero-container {
+        flex-direction: row;
+        align-items: stretch;
+        text-align: left;
+        gap: 0;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Imagem: ~55% da largura total, sem padding lateral esquerdo */
+    .hero-image {
+        flex: 0 0 55%;
+        max-width: 55%;
+        padding: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .hero-illustration {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        align-self: flex-end;
+    }
+
+    /* Texto: ocupa o restante, com padding interno */
+    .hero-text {
+        flex: 1;
+        justify-content: center;
+        padding: 60px 5% 60px 40px;
+        gap: 16px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+
     .benefits-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hero-text h1 {
+        font-size: 3.2rem;
+    }
+
+    .hero-text {
+        padding: 60px 8% 60px 50px;
+    }
+}
+
+/* Oculta imagem do hero em mobile e tablets (abaixo de 1024px) */
+@media (max-width: 1023px) {
+    .hero-image {
+        display: none !important;
+    }
+
+    .hero-text {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        padding: 40px 24px 50px;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
     }
 }
 
