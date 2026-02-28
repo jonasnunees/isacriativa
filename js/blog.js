@@ -158,25 +158,112 @@ function applyFilters({ scroll = false } = {}) {
 
     const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
 
+    // Limpa marcações de "featured" de rodadas anteriores (antes de qualquer lógica)
+    allCards.forEach(card => card.removeAttribute("data-is-featured"));
+
     // — Post em destaque —
-    // Filtrado separadamente pois não faz parte do `.posts-grid`.
-    // Sem este bloco, ele permanecia visível em qualquer categoria, dando a
-    // falsa impressão de que o filtro não havia funcionado.
+    // Em "todos": oculto (comportamento original).
+    // Em "papelaria": exibe o destaque original definido no HTML, sem modificações.
+    // Em outras categorias: popula dinamicamente com o primeiro card da categoria.
     if (postFeatured) {
-        const category = postFeatured.getAttribute("data-category") || "";
-        const title    = postFeatured.querySelector(".post-featured-title, h2")?.textContent.toLowerCase() || "";
-        const desc     = postFeatured.querySelector(".post-featured-desc")?.textContent.toLowerCase() || "";
+        const isTodos     = state.activeCategory === "todos";
+        const isPapelaria = state.activeCategory === "papelaria";
 
-        const matchCategory = state.activeCategory === "todos" || category === state.activeCategory;
-        const matchSearch   = !query || title.includes(query) || desc.includes(query);
+        if (isTodos) {
+            // Garante que a descrição esteja visível caso tenha sido ocultada antes
+            const descEl = postFeatured.querySelector(".post-featured-desc");
+            if (descEl) descEl.style.display = "";
+            postFeatured.style.display = "none";
+        } else if (isPapelaria) {
+            // Restaura os dados originais do destaque (podem ter sido sobrescritos por outra categoria)
+            if (featuredOriginal) {
+                postFeatured.setAttribute("href", featuredOriginal.href);
+                postFeatured.setAttribute("aria-label", featuredOriginal.ariaLabel);
+                const imgEl = postFeatured.querySelector(".post-featured-img");
+                if (imgEl) { imgEl.textContent = featuredOriginal.emoji; imgEl.setAttribute("style", featuredOriginal.thumbBg); }
+                const badge = postFeatured.querySelector(".post-category-badge");
+                if (badge) badge.textContent = featuredOriginal.badge;
+                const titleEl = postFeatured.querySelector(".post-featured-title");
+                if (titleEl) titleEl.textContent = featuredOriginal.title;
+                const descEl = postFeatured.querySelector(".post-featured-desc");
+                if (descEl) { descEl.innerHTML = featuredOriginal.desc; descEl.style.display = ""; }
+                const metaEl = postFeatured.querySelector(".post-featured-meta");
+                if (metaEl) metaEl.innerHTML = featuredOriginal.metaHTML;
+            }
+            const title  = postFeatured.querySelector(".post-featured-title")?.textContent.toLowerCase() || "";
+            const desc   = postFeatured.querySelector(".post-featured-desc")?.textContent.toLowerCase() || "";
+            const matchSearch = !query || title.includes(query) || desc.includes(query);
+            postFeatured.style.display = matchSearch ? "" : "none";
+        } else {
+            // Encontra o primeiro card da categoria ativa que bate com a busca
+            const firstMatch = Array.from(allCards).find(card => {
+                const cat   = card.getAttribute("data-category") || "";
+                const title = card.querySelector(".post-card-title, h2")?.textContent.toLowerCase() || "";
+                const matchCat    = cat === state.activeCategory;
+                const matchSearch = !query || title.includes(query);
+                return matchCat && matchSearch;
+            });
 
-        postFeatured.style.display = matchCategory && matchSearch ? "" : "none";
+            if (firstMatch) {
+                // Extrai dados do card para preencher o destaque
+                const href      = firstMatch.getAttribute("href") || "#";
+                const ariaLabel = firstMatch.getAttribute("aria-label") || "";
+                const thumbEl   = firstMatch.querySelector(".post-card-thumb");
+                const emoji     = thumbEl ? thumbEl.textContent.trim() : "";
+                const thumbBg   = thumbEl ? thumbEl.getAttribute("style") || "" : "";
+                const catLabel  = firstMatch.querySelector(".post-card-category")?.textContent || "";
+                const titleText = firstMatch.querySelector(".post-card-title, h2")?.textContent || "";
+                const metaItems = firstMatch.querySelectorAll(".post-card-meta [role='listitem']");
+                const metaHTML  = Array.from(metaItems).map(m => `<span role="listitem">${m.innerHTML}</span>`).join("");
+
+                // Atualiza atributos do link de destaque
+                postFeatured.setAttribute("href", href);
+                postFeatured.setAttribute("aria-label", ariaLabel.replace("Leia:", "Leia o artigo:"));
+                postFeatured.setAttribute("data-category", state.activeCategory);
+
+                // Atualiza imagem/emoji e background
+                const imgEl = postFeatured.querySelector(".post-featured-img");
+                if (imgEl) {
+                    imgEl.textContent = emoji;
+                    imgEl.setAttribute("style", thumbBg);
+                }
+
+                // Atualiza badge de categoria
+                const badge = postFeatured.querySelector(".post-category-badge");
+                if (badge) badge.textContent = catLabel;
+
+                // Atualiza título
+                const titleEl = postFeatured.querySelector(".post-featured-title");
+                if (titleEl) titleEl.textContent = titleText;
+
+                // Oculta a descrição (cards não têm desc), ou limpa
+                const descEl = postFeatured.querySelector(".post-featured-desc");
+                if (descEl) descEl.style.display = "none";
+
+                // Atualiza meta (data/tempo)
+                const metaEl = postFeatured.querySelector(".post-featured-meta");
+                if (metaEl) metaEl.innerHTML = metaHTML;
+
+                // Verifica se o título bate com a busca para ocultar se necessário
+                const titleLower = titleText.toLowerCase();
+                const matchSearch = !query || titleLower.includes(query);
+                postFeatured.style.display = matchSearch ? "" : "none";
+
+                // Marca o card fonte como "featured" para ocultá-lo no grid
+                firstMatch.setAttribute("data-is-featured", "true");
+            } else {
+                postFeatured.style.display = "none";
+            }
+        }
     }
 
     // — Cards do grid —
     const filteredCards = [];
 
     allCards.forEach(card => {
+        // Não inclui no grid o card que foi promovido a destaque
+        if (card.getAttribute("data-is-featured") === "true") return;
+
         const category = card.getAttribute("data-category") || "";
         const title    = card.querySelector(".post-card-title, h2")?.textContent.toLowerCase() || "";
         const desc     = card.querySelector(".post-featured-desc")?.textContent.toLowerCase() || "";
@@ -264,6 +351,12 @@ function renderLoadMore(totalFiltered) {
     }
 }
 
+// ─── Snapshot do destaque original ────────────────────────────────────────────
+
+// Armazena os dados originais do post-featured (definido no HTML para Papelaria)
+// para restaurá-los ao voltar para essa categoria após outra ter sobrescrito o DOM.
+let featuredOriginal = null;
+
 // ─── Inicialização ─────────────────────────────────────────────────────────────
 
 /**
@@ -271,6 +364,22 @@ function renderLoadMore(totalFiltered) {
  * A ordem importa: initLoadMore cria o botão que renderLoadMore irá controlar.
  */
 document.addEventListener("DOMContentLoaded", () => {
+    // Captura o estado original do destaque antes de qualquer manipulação dinâmica
+    const pf = document.querySelector(".post-featured");
+    if (pf) {
+        const metaItems = pf.querySelectorAll(".post-featured-meta [role='listitem']");
+        featuredOriginal = {
+            href:      pf.getAttribute("href"),
+            ariaLabel: pf.getAttribute("aria-label"),
+            emoji:     pf.querySelector(".post-featured-img")?.textContent.trim() || "",
+            thumbBg:   pf.querySelector(".post-featured-img")?.getAttribute("style") || "",
+            badge:     pf.querySelector(".post-category-badge")?.textContent || "",
+            title:     pf.querySelector(".post-featured-title")?.textContent || "",
+            desc:      pf.querySelector(".post-featured-desc")?.innerHTML || "",
+            metaHTML:  Array.from(metaItems).map(m => `<span role="listitem">${m.innerHTML}</span>`).join(""),
+        };
+    }
+
     initLoadMore();
     initBlogFilters();
     initSearch();

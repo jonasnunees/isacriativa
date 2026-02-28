@@ -1,0 +1,84 @@
+.coming-soon-wrapper {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.coming-soon-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 32px rgba(233, 30, 99, 0.08);
+    padding: 3rem 2.5rem;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+}
+
+.coming-soon-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    animation: bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+    color: #880e4f;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
+.coming-soon-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.35;
+    margin-bottom: 1rem;
+}
+
+.coming-soon-text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+}
+
+.coming-soon-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.coming-soon-back:hover,
+.coming-soon-back:focus-visible {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.coming-soon-back:focus-visible {
+    outline: 3px solid #e91e63;
+    outline-offset: 3px;
+}
