@@ -457,7 +457,7 @@ header {
 /* Instagram CTA */
 #instagram-cta {
     padding: 80px 0;
-    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #e1bee7 100%);
+    background: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
     text-align: center;
 }
 
@@ -470,41 +470,41 @@ header {
 
 .instagram-cta-icon {
     font-size: 3.5rem;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     line-height: 1;
 }
 
 #instagram-cta h2 {
     font-size: 2rem;
-    color: var(--text-dark);
+    color: #ffffff;
     margin: 0;
 }
 
 #instagram-cta p {
     font-size: 1.1rem;
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.85);
     max-width: 560px;
     line-height: 1.7;
     margin: 0;
 }
 
 .instagram-btn {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: white;
-    box-shadow: 0 4px 20px rgba(220, 39, 67, 0.3);
+    background: #ffffff;
+    color: #c2185b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     font-size: 1.05rem;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     margin-top: 8px;
+    font-weight: 700;
 }
 
 .instagram-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(220, 39, 67, 0.4);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    background: #fce4ec;
 }
 
 /* Depoimentos */
@@ -836,5 +836,12 @@ footer {
 
     .nav-item {
         margin: 15px 0;
+    }
+
+    #instagram-cta {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
