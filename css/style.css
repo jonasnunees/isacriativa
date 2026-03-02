@@ -582,19 +582,19 @@ header {
 #cta-final {
     padding: 100px 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--color-cta-start) 0%, var(--color-cta-end) 100%);
+    background: #ffffff;
 }
 
 .cta-final-content h2 {
     font-size: 2rem;
-    color: white;
+    color: var(--primary-dark);
     margin-bottom: 15px;
 }
 
 .cta-final-content p {
-    color: white;
+    color: var(--text-light);
     margin-bottom: 30px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 /* Footer */
