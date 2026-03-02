@@ -807,6 +807,52 @@ footer {
     }
 }
 
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Hero */
+    .hero-text {
+        padding: 60px 40px 70px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.6rem;
+    }
+
+    .hero-text p {
+        font-size: 1.15rem;
+    }
+
+    /* Títulos de seção */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Seções — distribui o espaço vertical */
+    #diferenciais,
+    #galeria,
+    #como-funciona,
+    #depoimentos,
+    #instagram-cta,
+    #cta-final {
+        padding: 70px 40px;
+    }
+
+    /* Textos de apoio */
+    #instagram-cta p,
+    .cta-final-content p {
+        font-size: 1.15rem;
+    }
+
+    #instagram-cta h2,
+    .cta-final-content h2 {
+        font-size: 2rem;
+    }
+
+    .depoimento-texto {
+        font-size: 1.1rem;
+    }
+}
+
 /* Menu Mobile Responsivo */
 @media (max-width: 767px) {
     .hamburger {
