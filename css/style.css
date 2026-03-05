@@ -719,11 +719,31 @@ footer {
 
 /* ── Swiper Galeria (mobile only) ──────────────────────────────────────── */
 
+/* Wrapper que contém o Swiper: overflow hidden evita vazamento lateral,
+   mask-image cria o efeito de fade nas bordas para aparência de carrossel infinito */
+.gallery-swiper-wrapper {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 18%,
+        black 82%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 18%,
+        black 82%,
+        transparent 100%
+    );
+}
+
 /* O swiper fica visível apenas no mobile; no tablet/desktop usa o grid normal */
 .gallery-swiper {
     display: none; /* oculto por padrão — JS e media query ativam no mobile */
     padding-bottom: 40px !important; /* espaço para os dots de paginação */
-    overflow: visible !important;    /* permite que slides laterais apareçam */
+    overflow: visible !important;    /* slides adjacentes aparecem nas bordas */
 }
 
 /* Slide central em destaque */
@@ -764,20 +784,25 @@ footer {
     border-radius: 15px;
 }
 
-/* Paginação (dots) */
-.gallery-swiper .swiper-pagination {
-    bottom: 8px;
+/* Paginação (dots) — elemento externo ao wrapper para não sofrer o fade */
+.gallery-swiper-pagination {
+    display: none; /* visível apenas no mobile via media query */
+    text-align: center;
+    padding: 8px 0 0;
 }
 
-.gallery-swiper .swiper-pagination-bullet {
+.gallery-swiper-pagination .swiper-pagination-bullet {
     background: var(--primary-dark);
     opacity: 0.35;
     width: 8px;
     height: 8px;
     transition: opacity 0.3s, transform 0.3s;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0 4px;
 }
 
-.gallery-swiper .swiper-pagination-bullet-active {
+.gallery-swiper-pagination .swiper-pagination-bullet-active {
     opacity: 1;
     transform: scale(1.3);
 }
@@ -977,6 +1002,10 @@ footer {
 /* ── Swiper visível no mobile, grid oculto ── */
 @media (max-width: 767px) {
     .gallery-swiper {
+        display: block;
+    }
+
+    .gallery-swiper-pagination {
         display: block;
     }
 

@@ -343,10 +343,6 @@
                         modifier: 1.5,
                         slideShadows: false,
                     },
-                    pagination: {
-                        el: '.gallery-swiper .swiper-pagination',
-                        clickable: true,
-                    },
                     a11y: {
                         prevSlideMessage: 'Foto anterior',
                         nextSlideMessage: 'Próxima foto',
