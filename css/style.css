@@ -719,53 +719,26 @@ footer {
 
 /* ── Swiper Galeria (mobile only) ──────────────────────────────────────── */
 
-/* Wrapper que contém o Swiper: overflow hidden evita vazamento lateral,
-   mask-image cria o efeito de fade nas bordas para aparência de carrossel infinito */
+/* Wrapper que contém o Swiper */
 .gallery-swiper-wrapper {
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 18%,
-        black 82%,
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 18%,
-        black 82%,
-        transparent 100%
-    );
 }
 
 /* O swiper fica visível apenas no mobile; no tablet/desktop usa o grid normal */
 .gallery-swiper {
     display: none; /* oculto por padrão — JS e media query ativam no mobile */
     padding-bottom: 40px !important; /* espaço para os dots de paginação */
-    overflow: visible !important;    /* slides adjacentes aparecem nas bordas */
+    overflow: hidden;
 }
 
-/* Slide central em destaque */
+/* Slides */
 .gallery-swiper .swiper-slide {
-    transform: scale(0.82);
-    filter: brightness(0.7) blur(1px);
-    transition: transform 0.4s ease, filter 0.4s ease;
     border-radius: 15px;
     overflow: hidden;
 }
 
 .gallery-swiper .swiper-slide-active {
-    transform: scale(1);
-    filter: brightness(1) blur(0px);
     z-index: 2;
-}
-
-/* Slides adjacentes: ligeiramente maiores que os distantes */
-.gallery-swiper .swiper-slide-prev,
-.gallery-swiper .swiper-slide-next {
-    transform: scale(0.88);
-    filter: brightness(0.8) blur(0.5px);
 }
 
 /* Imagem dentro do slide */

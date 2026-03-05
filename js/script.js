@@ -331,17 +331,12 @@
         function mountSwiper() {
             if (window.innerWidth < 768 && !swiperInstance) {
                 swiperInstance = new Swiper('.gallery-swiper', {
-                    effect: 'coverflow',
                     grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: 1.6,   // mostra ~3 slides: 1 central + bordas dos adjacentes
+                    slidesPerView: 1,
                     loop: true,
-                    coverflowEffect: {
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 120,
-                        modifier: 1.5,
-                        slideShadows: false,
+                    pagination: {
+                        el: '.gallery-swiper-pagination',
+                        clickable: true,
                     },
                     a11y: {
                         prevSlideMessage: 'Foto anterior',
