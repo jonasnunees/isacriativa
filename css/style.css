@@ -717,7 +717,72 @@ footer {
     }
 }
 
-/* ====== MEDIA QUERIES (Desktop) ====== */
+/* ── Swiper Galeria (mobile only) ──────────────────────────────────────── */
+
+/* O swiper fica visível apenas no mobile; no tablet/desktop usa o grid normal */
+.gallery-swiper {
+    display: none; /* oculto por padrão — JS e media query ativam no mobile */
+    padding-bottom: 40px !important; /* espaço para os dots de paginação */
+    overflow: visible !important;    /* permite que slides laterais apareçam */
+}
+
+/* Slide central em destaque */
+.gallery-swiper .swiper-slide {
+    transform: scale(0.82);
+    filter: brightness(0.7) blur(1px);
+    transition: transform 0.4s ease, filter 0.4s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.gallery-swiper .swiper-slide-active {
+    transform: scale(1);
+    filter: brightness(1) blur(0px);
+    z-index: 2;
+}
+
+/* Slides adjacentes: ligeiramente maiores que os distantes */
+.gallery-swiper .swiper-slide-prev,
+.gallery-swiper .swiper-slide-next {
+    transform: scale(0.88);
+    filter: brightness(0.8) blur(0.5px);
+}
+
+/* Imagem dentro do slide */
+.gallery-swiper .gallery-btn {
+    border-radius: 15px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+}
+
+.gallery-swiper .gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+}
+
+/* Paginação (dots) */
+.gallery-swiper .swiper-pagination {
+    bottom: 8px;
+}
+
+.gallery-swiper .swiper-pagination-bullet {
+    background: var(--primary-dark);
+    opacity: 0.35;
+    width: 8px;
+    height: 8px;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.gallery-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+
 
 /* Layout geral: 2 colunas, steps horizontal e footer — a partir de 768px */
 @media (min-width: 768px) {
@@ -907,5 +972,33 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+/* ── Swiper visível no mobile, grid oculto ── */
+@media (max-width: 767px) {
+    .gallery-swiper {
+        display: block;
+    }
+
+    .gallery-grid {
+        display: none;
+    }
+
+    #galeria {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/* ── No tablet/desktop o swiper some e o grid volta ── */
+@media (min-width: 768px) {
+    .gallery-swiper {
+        display: none !important;
+    }
+
+    .gallery-grid {
+        display: grid;
     }
 }

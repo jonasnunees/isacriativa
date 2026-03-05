@@ -313,7 +313,58 @@
         });
     }
 
-    // ─── Inicialização ─────────────────────────────────────────────────────────
+    /**
+     * 7. Swiper da Galeria (Mobile)
+     * Inicializa o carrossel SwiperJS na seção de galeria apenas em telas
+     * com largura menor que 768px. Exibe 3 slides visíveis por vez com o
+     * slide central em destaque (efeito coverflow).
+     *
+     * A instância é destruída/recriada ao redimensionar a janela para garantir
+     * que o componente só rode no mobile, sem interferir no layout desktop.
+     */
+    function initGallerySwiper() {
+        const swiperEl = document.querySelector('.gallery-swiper');
+        if (!swiperEl) return;
+
+        let swiperInstance = null;
+
+        function mountSwiper() {
+            if (window.innerWidth < 768 && !swiperInstance) {
+                swiperInstance = new Swiper('.gallery-swiper', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: 1.6,   // mostra ~3 slides: 1 central + bordas dos adjacentes
+                    loop: true,
+                    coverflowEffect: {
+                        rotate: 0,
+                        stretch: 0,
+                        depth: 120,
+                        modifier: 1.5,
+                        slideShadows: false,
+                    },
+                    pagination: {
+                        el: '.gallery-swiper .swiper-pagination',
+                        clickable: true,
+                    },
+                    a11y: {
+                        prevSlideMessage: 'Foto anterior',
+                        nextSlideMessage: 'Próxima foto',
+                    },
+                });
+            } else if (window.innerWidth >= 768 && swiperInstance) {
+                swiperInstance.destroy(true, true);
+                swiperInstance = null;
+            }
+        }
+
+        mountSwiper();
+
+        // Reavalia ao redimensionar (ex: rotação de tela)
+        window.addEventListener('resize', mountSwiper);
+    }
+
+
 
     /**
      * Ponto de entrada único da aplicação.
@@ -326,6 +377,7 @@
         initTestimonialCarousel();
         initHeroSlideshow();
         initWhatsAppTracking();
+        initGallerySwiper();
     });
 
 })();
