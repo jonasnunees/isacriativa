@@ -1004,3 +1004,19 @@ footer {
         display: grid;
     }
 }
+/* Hint de arrastar — visível apenas no mobile junto ao swiper */
+.swiper-hint {
+    display: none;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    opacity: 0.6;
+    margin-top: 6px;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 767px) {
+    .swiper-hint {
+        display: block;
+    }
+}
