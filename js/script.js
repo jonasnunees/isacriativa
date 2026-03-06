@@ -120,16 +120,17 @@
             lastFocusedElement = document.activeElement;
             modalImg.src = imgSrc;
             modalImg.alt = imgAlt;
-            modal.style.display = 'block';
+            // Usamos .is-open em vez de style.display para manter o controle
+            // de visibilidade inteiramente no CSS, eliminando o seletor frágil
+            // [style*="display:block"] que existia anteriormente na folha de estilos.
+            modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
-            // Usando classe CSS ao invés de style inline para evitar conflito
-            // com outros componentes que também possam manipular o overflow do body
             document.body.classList.add('modal-open');
             closeBtn.focus();
         }
 
         function closeModal() {
-            modal.style.display = 'none';
+            modal.classList.remove('is-open');
             modal.setAttribute('aria-hidden', 'true');
             // Limpa o src para interromper qualquer carregamento em progresso
             modalImg.src = '';
@@ -154,7 +155,7 @@
 
         // Fecha com Escape — comportamento esperado pelo usuário em qualquer modal
         window.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && modal.style.display === 'block') closeModal();
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
         });
 
         // Mantém o foco preso dentro do modal (focus trap) enquanto ele está aberto,

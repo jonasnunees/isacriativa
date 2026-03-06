@@ -1,28 +1,80 @@
-/* Variáveis de Cores e Fontes (Tons Pastel e Delicados) */
+/*
+ * ============================================================
+ *  STYLE.CSS — Folha de estilos principal
+ * ============================================================
+ *
+ *  Índice de seções:
+ *  1.  Variáveis (Design Tokens)
+ *  2.  Reset & Base
+ *  3.  Layout Utilitário (.container)
+ *  4.  Header & Navegação
+ *  5.  Botões
+ *  6.  Tipografia de Seção (.section-title)
+ *  7.  Hero
+ *  8.  Benefícios
+ *  9.  Galeria (Grid + Modal)
+ *  10. Swiper — Galeria Mobile
+ *  11. Como Funciona
+ *  12. Instagram CTA
+ *  13. Depoimentos
+ *  14. CTA Final
+ *  15. Blog CTA
+ *  16. Footer
+ *  17. WhatsApp Flutuante
+ *  18. Scroll Reveal
+ *  19. Animações (@keyframes)
+ *  20. Media Queries Responsivas
+ *  21. Acessibilidade (prefers-reduced-motion)
+ *
+ * ============================================================
+ */
+
+
+/* ============================================================
+ *  1. VARIÁVEIS (DESIGN TOKENS)
+ *
+ *  Centralizamos aqui todas as cores, tipografia e constantes
+ *  de layout. Alterar um valor aqui reflete em todo o projeto.
+ * ============================================================ */
 :root {
-    --primary-color: #f8bbd0; /* Rosa pastel */
-    --primary-dark: #f06292;
-    --secondary-color: #b3e5fc; /* Azul pastel */
-    --accent-color: #e1bee7; /* Lilás pastel */
-    --text-dark: #4a4a4a;
-    --text-light: #7a7a7a;
-    --bg-light: #fffcfd;
-    --bg-gray: #fdfbfb;
-    --font-main: 'Nunito', sans-serif;
-    --font-logo: 'Pacifico', cursive;
-    --transition-speed: 0.3s;
+    /* --- Paleta de Cores --- */
+    --primary-color:      #f8bbd0; /* Rosa pastel — bordas, destaques suaves    */
+    --primary-dark:       #f06292; /* Rosa escuro — botões, links, ícones        */
+    --secondary-color:    #b3e5fc; /* Azul pastel — uso complementar            */
+    --accent-color:       #e1bee7; /* Lilás pastel — numeração de steps, etc.   */
 
-    /* Cores de seções e elementos específicos */
-    --color-depoimentos-bg: #c2185b;
-    --color-cta-start: #ad1457;
-    --color-cta-end: #6a1b9a;
-    --color-whatsapp: #25d366;
+    /* --- Cores de Texto --- */
+    --text-dark:          #4a4a4a; /* Texto principal                           */
+    --text-light:         #7a7a7a; /* Texto secundário / descrições             */
+    --text-muted-on-dark: #cccccc; /* Texto discreto sobre fundos escuros (footer) */
 
-    /* Layout */
-    --header-height: 70px;
+    /* --- Fundos --- */
+    --bg-light:           #fffcfd; /* Fundo geral da página                     */
+    --bg-gray:            #fdfbfb; /* Fundo de cards e seções alternadas        */
+
+    /* --- Tipografia --- */
+    --font-main:          'Nunito', sans-serif;
+    --font-logo:          'Pacifico', cursive;
+
+    /* --- Gradiente de Marca (rosa → roxo)
+         Reutilizado em: #instagram-cta, #depoimentos.
+         Altere aqui para mudar ambas as seções ao mesmo tempo. --- */
+    --gradient-brand: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
+
+    /* --- Transições --- */
+    --transition-speed:   0.3s;
+
+    /* --- Cores de Elementos Específicos --- */
+    --color-whatsapp:     #25d366; /* Botão flutuante do WhatsApp               */
+
+    /* --- Layout --- */
+    --header-height:      70px;    /* Altura fixa do header; usada em calc()    */
 }
 
-/* Reset Básico */
+
+/* ============================================================
+ *  2. RESET & BASE
+ * ============================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -41,13 +93,20 @@ body {
     overflow-x: hidden;
 }
 
+
+/* ============================================================
+ *  3. LAYOUT UTILITÁRIO
+ * ============================================================ */
 .container {
     width: 90%;
     max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Header & Menu */
+
+/* ============================================================
+ *  4. HEADER & NAVEGAÇÃO
+ * ============================================================ */
 header {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(5px);
@@ -55,7 +114,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .header-content {
@@ -71,6 +130,7 @@ header {
     color: var(--primary-dark);
 }
 
+/* --- Menu Desktop --- */
 .nav-list {
     list-style: none;
     display: flex;
@@ -88,7 +148,8 @@ header {
     color: var(--primary-dark);
 }
 
-/* Menu Hamburger (Mobile First) */
+/* --- Menu Hamburger (visível apenas no mobile) ---
+   Controlado via JS que adiciona/remove a classe .active. */
 .hamburger {
     display: none;
     cursor: pointer;
@@ -103,16 +164,28 @@ header {
     outline-offset: 2px;
 }
 
+/* Cada barra do ícone hamburger.
+   Usamos transform e opacity para animar o ícone X ao abrir o menu. */
 .bar {
     display: block;
     width: 25px;
     height: 3px;
     margin: 5px auto;
     background-color: var(--primary-dark);
-    transition: all 0.3s ease-in-out;
+    /* Especificamos apenas as propriedades que realmente mudam,
+       evitando repinturas desnecessárias com "transition: all". */
+    transition: transform var(--transition-speed) ease-in-out,
+                opacity  var(--transition-speed) ease-in-out;
 }
 
-/* Botões */
+
+/* ============================================================
+ *  5. BOTÕES
+ *
+ *  .cta-btn é a base. .primary-btn e .secondary-btn são variantes.
+ *  Botões de seções específicas (.instagram-btn, .blog-btn) herdam
+ *  .cta-btn e sobrescrevem apenas o necessário.
+ * ============================================================ */
 .cta-btn {
     display: inline-block;
     padding: 12px 28px;
@@ -120,8 +193,8 @@ header {
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .primary-btn {
@@ -146,7 +219,10 @@ header {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Tipografia e Títulos */
+
+/* ============================================================
+ *  6. TIPOGRAFIA DE SEÇÃO
+ * ============================================================ */
 .section-title {
     text-align: center;
     font-size: 2.2rem;
@@ -154,8 +230,16 @@ header {
     margin-bottom: 40px;
 }
 
-/* Hero Section */
-/* Hero Section — layout full-bleed: imagem da borda esquerda até o texto */
+
+/* ============================================================
+ *  7. HERO
+ *
+ *  Layout full-bleed mobile-first:
+ *  — Mobile/Tablet (<1024px): coluna única, imagem oculta.
+ *  — Desktop (≥1024px): duas colunas, imagem ocupa ~55% à esquerda.
+ * ============================================================ */
+
+/* --- Seção --- */
 #hero {
     padding: 0;
     background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 60%, #e0f7fa 100%);
@@ -166,7 +250,7 @@ header {
     align-items: stretch;
 }
 
-/* No mobile: empilhado */
+/* --- Container interno (empilhado no mobile por padrão) --- */
 .hero-container {
     display: flex;
     flex-direction: column;
@@ -180,7 +264,7 @@ header {
     min-height: calc(100vh - var(--header-height));
 }
 
-/* Bloco da imagem: sem padding, toca a borda */
+/* --- Bloco da imagem --- */
 .hero-image {
     width: 100%;
     padding: 30px 10px 10px;
@@ -197,12 +281,7 @@ header {
     filter: drop-shadow(0 8px 24px rgba(240, 98, 146, 0.18));
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-12px); }
-}
-
-/* Bloco do texto */
+/* --- Bloco de texto --- */
 .hero-text {
     display: flex;
     flex-direction: column;
@@ -250,7 +329,12 @@ header {
     margin: 4px 0 8px;
 }
 
-/* Benefícios */
+
+/* ============================================================
+ *  8. BENEFÍCIOS
+ *
+ *  Grid de 1 coluna no mobile, expande via media queries abaixo.
+ * ============================================================ */
 #beneficios {
     padding: 80px 0;
     background-color: white;
@@ -267,13 +351,13 @@ header {
     padding: 30px 20px;
     background-color: var(--bg-gray);
     border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
     transition: transform var(--transition-speed);
-    border: 1px solid rgba(0,0,0,0.03);
 }
 
 .benefit-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .benefit-card i {
@@ -286,7 +370,12 @@ header {
     margin-bottom: 10px;
 }
 
-/* Galeria */
+
+/* ============================================================
+ *  9. GALERIA (Grid + Modal)
+ * ============================================================ */
+
+/* --- Grid Desktop/Tablet --- */
 #galeria {
     padding: 80px 0;
     background-color: var(--bg-gray);
@@ -294,6 +383,8 @@ header {
 
 .gallery-grid {
     display: grid;
+    /* auto-fit distribui as colunas automaticamente;
+       min(250px, 100%) garante que não ultrapasse a viewport em mobile. */
     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 20px;
 }
@@ -304,6 +395,7 @@ header {
     border-radius: 15px;
 }
 
+/* Botão semântico que envolve cada imagem para ativação do modal */
 .gallery-btn {
     display: block;
     width: 100%;
@@ -321,9 +413,8 @@ header {
     outline-offset: 3px;
 }
 
-/* Corrigido: uso de aspect-ratio no lugar de height fixa para evitar corte no mobile.
-   A altura fixa de 250px não se adaptava a telas pequenas, causando recorte nas imagens.
-   aspect-ratio mantém proporção consistente em qualquer largura, sem CLS. */
+/* aspect-ratio substitui height fixa: mantém proporção quadrada
+   sem causar CLS (Cumulative Layout Shift) em qualquer largura. */
 .gallery-img {
     width: 100%;
     height: auto;
@@ -333,9 +424,10 @@ header {
     transition: transform 0.5s ease;
 }
 
+/* --- Overlay de hover --- */
 .gallery-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    inset: 0; /* equivalente a top/right/bottom/left: 0 */
     background: rgba(240, 98, 146, 0.6);
     display: flex;
     justify-content: center;
@@ -352,33 +444,28 @@ header {
     transition: transform var(--transition-speed);
 }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
+.gallery-item:hover img            { transform: scale(1.1); }
+.gallery-item:hover .gallery-overlay        { opacity: 1; }
+.gallery-item:hover .gallery-overlay span   { transform: translateY(0); }
 
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-.gallery-item:hover .gallery-overlay span {
-    transform: translateY(0);
-}
-
-/* Modal */
+/* --- Modal de imagem ampliada ---
+   IMPORTANTE: o modal é controlado por JS adicionando/removendo
+   a classe .is-open — isso evita o hack frágil de detectar
+   style="display:block" via seletor de atributo. */
 .modal {
     display: none;
     position: fixed;
     z-index: 2000;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
     padding: 60px 16px 16px;
 }
 
-.modal[style*="display: block"],
-.modal[style*="display:block"] {
-    display: flex !important;
+/* Classe adicionada pelo JS para exibir o modal como flex */
+.modal.is-open {
+    display: flex;
 }
 
 .modal-content {
@@ -393,7 +480,8 @@ header {
 
 .close-modal {
     position: absolute;
-    top: 30px; right: 40px;
+    top: 30px;
+    right: 40px;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
@@ -405,26 +493,103 @@ header {
     border-radius: 4px;
 }
 
-.close-modal:hover {
-    color: white;
-}
+.close-modal:hover        { color: white; }
 
 .close-modal:focus-visible {
     outline: 2px solid white;
     outline-offset: 2px;
 }
 
-@keyframes zoom {
-    from {transform: scale(0)}
-    to {transform: scale(1)}
+
+/* ============================================================
+ *  10. SWIPER — GALERIA MOBILE
+ *
+ *  O Swiper é exibido apenas em mobile (<768px).
+ *  No tablet/desktop o grid convencional é utilizado.
+ * ============================================================ */
+
+/* Wrapper que evita que o overflow do swiper "vaze" para a página */
+.gallery-swiper-wrapper {
+    overflow: hidden;
 }
 
-/* Como Funciona */
+/* O componente swiper é oculto por padrão; a media query
+   de mobile e o JS o ativam quando necessário. */
+.gallery-swiper {
+    display: none;
+    padding-bottom: 40px !important; /* espaço reservado para os dots de paginação */
+    overflow: hidden;
+}
+
+.gallery-swiper .swiper-slide {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.gallery-swiper .swiper-slide-active {
+    z-index: 2;
+}
+
+.gallery-swiper .gallery-btn {
+    border-radius: 15px;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+}
+
+.gallery-swiper .gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+}
+
+/* --- Paginação (dots) externa ao wrapper para não receber o fade --- */
+.gallery-swiper-pagination {
+    display: none; /* visível apenas no mobile via media query */
+    text-align: center;
+    padding: 8px 0 0;
+}
+
+.gallery-swiper-pagination .swiper-pagination-bullet {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background: var(--primary-dark);
+    opacity: 0.35;
+    border-radius: 50%;
+    transition: opacity var(--transition-speed),
+                transform var(--transition-speed);
+}
+
+.gallery-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+/* Hint de arrastar — indica ao usuário que o swiper é deslizável */
+.swiper-hint {
+    display: none; /* visível apenas no mobile via media query */
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    opacity: 0.6;
+    margin-top: 6px;
+    letter-spacing: 0.03em;
+}
+
+
+/* ============================================================
+ *  11. COMO FUNCIONA
+ * ============================================================ */
 #como-funciona {
     padding: 80px 0;
     background-color: white;
 }
 
+/* Coluna única no mobile; linha horizontal no tablet+ (via media query) */
 .steps-container {
     display: flex;
     flex-direction: column;
@@ -454,10 +619,14 @@ header {
 }
 
 
-/* Instagram CTA */
+/* ============================================================
+ *  12. INSTAGRAM CTA
+ *
+ *  Usa --gradient-brand para consistência visual com #depoimentos.
+ * ============================================================ */
 #instagram-cta {
     padding: 80px 0;
-    background: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
+    background: var(--gradient-brand);
     text-align: center;
 }
 
@@ -470,14 +639,14 @@ header {
 
 .instagram-cta-icon {
     font-size: 3.5rem;
-    color: #ffffff;
-    -webkit-text-fill-color: #ffffff;
+    color: white;
+    -webkit-text-fill-color: white; /* compatibilidade com gradient text em webkit */
     line-height: 1;
 }
 
 #instagram-cta h2 {
     font-size: 2rem;
-    color: #ffffff;
+    color: white;
     margin: 0;
 }
 
@@ -490,7 +659,7 @@ header {
 }
 
 .instagram-btn {
-    background: #ffffff;
+    background: white;
     color: #c2185b;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     font-size: 1.05rem;
@@ -507,7 +676,12 @@ header {
     background: #fce4ec;
 }
 
-/* Depoimentos */
+
+/* ============================================================
+ *  13. DEPOIMENTOS
+ *
+ *  Usa --gradient-brand para consistência visual com #instagram-cta.
+ * ============================================================ */
 #depoimentos {
     padding: 80px 0;
     min-height: 100vh;
@@ -515,7 +689,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
+    background: var(--gradient-brand);
     color: white;
 }
 
@@ -529,6 +703,7 @@ header {
     text-align: center;
 }
 
+/* Cada depoimento é oculto por padrão; o JS adiciona .active no atual */
 .testimonial {
     display: none;
     animation: fade 0.8s;
@@ -549,21 +724,22 @@ header {
     color: white;
 }
 
+/* --- Dots de navegação do carousel --- */
 .carousel-dots {
     margin-top: 20px;
 }
 
 .dot {
-    height: 12px;
+    display: inline-block;
     width: 12px;
+    height: 12px;
     margin: 0 5px;
-    background-color: rgba(255,255,255,0.5);
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.5);
     border: none;
     border-radius: 50%;
-    display: inline-block;
     cursor: pointer;
-    transition: background-color 0.3s;
-    padding: 0;
+    transition: background-color var(--transition-speed);
 }
 
 .dot.active,
@@ -576,14 +752,14 @@ header {
     outline-offset: 3px;
 }
 
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-}
 
-/* CTA Final
-   Corrigido: fundo pastel claro com texto branco reprovava no WCAG AA (contraste insuficiente).
-   Substituído por gradiente escuro de rosa/roxo que garante contraste mínimo de 4.5:1. */
+/* ============================================================
+ *  14. CTA FINAL
+ *
+ *  Nota: o fundo pastel claro original com texto branco não atingia
+ *  contraste mínimo de 4.5:1 (WCAG AA). O fundo branco atual com
+ *  texto escuro / rosa garante contraste adequado.
+ * ============================================================ */
 #cta-final {
     padding: 100px 0;
     min-height: 100vh;
@@ -592,7 +768,7 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #ffffff;
+    background: white;
 }
 
 .cta-final-content h2 {
@@ -607,58 +783,10 @@ header {
     font-size: 1.2rem;
 }
 
-/* Footer */
-footer {
-    background-color: var(--text-dark);
-    color: white;
-    padding: 40px 0 20px;
-}
 
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.footer-brand .logo {
-    color: var(--primary-color);
-    margin-bottom: 5px;
-}
-
-.footer-social a {
-    color: white;
-    font-size: 1.5rem;
-    margin: 0 10px;
-    transition: color 0.3s;
-}
-
-.footer-social a:hover {
-    color: var(--primary-color);
-}
-
-.footer-social a:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 20px;
-    font-size: 0.9rem;
-    color: #ccc;
-}
-
-.footer-privacy-link {
-    color: #ccc;
-    text-decoration: underline;
-}
-
-/* ── Blog CTA Section ─────────────────────────────────────────────────── */
+/* ============================================================
+ *  15. BLOG CTA
+ * ============================================================ */
 #blog-cta {
     min-height: 100vh;
     display: flex;
@@ -670,12 +798,14 @@ footer {
     padding: 80px 0;
 }
 
+/* Camada de fundo decorativa; pointer-events: none evita interferência nos cliques */
 .blog-cta-bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
 }
 
+/* Ícones decorativos flutuantes — posicionados individualmente via .deco-N */
 .blog-cta-deco {
     position: absolute;
     font-size: 2.5rem;
@@ -683,16 +813,11 @@ footer {
     animation: blog-float 6s ease-in-out infinite;
 }
 
-.deco-1 { top: 10%;  left: 5%;   animation-delay: 0s;    color: var(--primary-dark); }
-.deco-2 { top: 20%;  right: 8%;  animation-delay: 1.2s;  font-size: 3rem; }
-.deco-3 { bottom: 25%; left: 12%; animation-delay: 2.4s; color: var(--primary-dark); }
-.deco-4 { bottom: 15%; right: 6%; animation-delay: 0.8s; font-size: 2.8rem; }
-.deco-5 { top: 55%;  left: 50%;  animation-delay: 3s;   color: var(--accent-color); font-size: 2rem; }
-
-@keyframes blog-float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50%       { transform: translateY(-16px) rotate(8deg); }
-}
+.deco-1 { top: 10%;    left: 5%;   animation-delay: 0s;   color: var(--primary-dark); }
+.deco-2 { top: 20%;    right: 8%;  animation-delay: 1.2s; font-size: 3rem; }
+.deco-3 { bottom: 25%; left: 12%;  animation-delay: 2.4s; color: var(--primary-dark); }
+.deco-4 { bottom: 15%; right: 6%;  animation-delay: 0.8s; font-size: 2.8rem; }
+.deco-5 { top: 55%;    left: 50%;  animation-delay: 3s;   color: var(--accent-color); font-size: 2rem; }
 
 .blog-cta-content {
     position: relative;
@@ -731,11 +856,11 @@ footer {
 }
 
 .blog-cta-accent {
+    display: block;
     color: var(--primary-dark);
     font-family: var(--font-logo);
     font-size: 2.6rem;
     font-weight: 400;
-    display: block;
     margin-top: 6px;
 }
 
@@ -747,6 +872,7 @@ footer {
     margin: 0;
 }
 
+/* Pills de categorias/tópicos do blog */
 .blog-cta-pills {
     list-style: none;
     display: flex;
@@ -775,14 +901,14 @@ footer {
 }
 
 .blog-btn {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, #9c27b0 100%);
-    color: white;
-    box-shadow: 0 6px 24px rgba(156, 39, 176, 0.3);
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #9c27b0 100%);
+    color: white;
     font-size: 1.1rem;
     padding: 14px 36px;
+    box-shadow: 0 6px 24px rgba(156, 39, 176, 0.3);
 }
 
 .blog-btn:hover {
@@ -795,67 +921,102 @@ footer {
     outline-offset: 3px;
 }
 
-@media (max-width: 767px) {
-    #blog-cta h2 {
-        font-size: 1.9rem;
-    }
 
-    .blog-cta-accent {
-        font-size: 2rem;
-    }
-
-    .blog-cta-lead {
-        font-size: 1rem;
-    }
+/* ============================================================
+ *  16. FOOTER
+ * ============================================================ */
+footer {
+    background-color: var(--text-dark);
+    color: white;
+    padding: 40px 0 20px;
 }
 
-@media (min-width: 1024px) {
-    #blog-cta h2 {
-        font-size: 3rem;
-    }
-
-    .blog-cta-accent {
-        font-size: 3.2rem;
-    }
-
-    .blog-cta-lead {
-        font-size: 1.15rem;
-    }
+/* Coluna única no mobile; linha horizontal no tablet+ (via media query) */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* WhatsApp Flutuante */
+.footer-brand .logo {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color var(--transition-speed);
+}
+
+.footer-social a:hover        { color: var(--primary-color); }
+
+.footer-social a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted-on-dark);
+}
+
+/* --text-muted-on-dark garante consistência com a variável centralizada */
+.footer-privacy-link {
+    color: var(--text-muted-on-dark);
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+ *  17. WHATSAPP FLUTUANTE
+ * ============================================================ */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: var(--color-whatsapp);
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--color-whatsapp);
+    color: white;
     font-size: 35px;
-    box-shadow: 2px 2px 15px rgba(0,0,0,0.2);
-    z-index: 1000;
-    transition: transform 0.3s;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-speed);
 }
 
-.whatsapp-float:hover {
-    transform: scale(1.1);
-}
+.whatsapp-float:hover { transform: scale(1.1); }
 
 .whatsapp-float:focus-visible {
     outline: 3px solid white;
     outline-offset: 3px;
 }
 
-/* Scroll Reveal Classes */
+
+/* ============================================================
+ *  18. SCROLL REVEAL
+ *
+ *  Elementos com .reveal começam invisíveis e deslocados.
+ *  O JS adiciona .active quando entram no viewport.
+ * ============================================================ */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease-out;
+    /* Especificamos as propriedades individualmente para
+       evitar o custo de "transition: all" em cada frame. */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .reveal.active {
@@ -863,198 +1024,90 @@ footer {
     transform: translateY(0);
 }
 
-/* Acessibilidade: respeita preferência do sistema por menos movimento */
-@media (prefers-reduced-motion: reduce) {
-    .modal-content {
-        animation: none;
-    }
 
-    .reveal {
-        transition: none;
-    }
+/* ============================================================
+ *  19. ANIMAÇÕES (@keyframes)
+ * ============================================================ */
 
-    .hero-image .slide {
-        transition: none;
-    }
-
-    .testimonial {
-        animation: none;
-    }
+/* Flutuação suave do hero */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
 }
 
-/* ── Swiper Galeria (mobile only) ──────────────────────────────────────── */
-
-/* Wrapper que contém o Swiper */
-.gallery-swiper-wrapper {
-    overflow: hidden;
+/* Abertura do modal */
+@keyframes zoom {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
 }
 
-/* O swiper fica visível apenas no mobile; no tablet/desktop usa o grid normal */
-.gallery-swiper {
-    display: none; /* oculto por padrão — JS e media query ativam no mobile */
-    padding-bottom: 40px !important; /* espaço para os dots de paginação */
-    overflow: hidden;
+/* Fade de entrada dos depoimentos */
+@keyframes fade {
+    from { opacity: 0.4; }
+    to   { opacity: 1; }
 }
 
-/* Slides */
-.gallery-swiper .swiper-slide {
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.gallery-swiper .swiper-slide-active {
-    z-index: 2;
-}
-
-/* Imagem dentro do slide */
-.gallery-swiper .gallery-btn {
-    border-radius: 15px;
-    overflow: hidden;
-    display: block;
-    width: 100%;
-}
-
-.gallery-swiper .gallery-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-    border-radius: 15px;
-}
-
-/* Paginação (dots) — elemento externo ao wrapper para não sofrer o fade */
-.gallery-swiper-pagination {
-    display: none; /* visível apenas no mobile via media query */
-    text-align: center;
-    padding: 8px 0 0;
-}
-
-.gallery-swiper-pagination .swiper-pagination-bullet {
-    background: var(--primary-dark);
-    opacity: 0.35;
-    width: 8px;
-    height: 8px;
-    transition: opacity 0.3s, transform 0.3s;
-    display: inline-block;
-    border-radius: 50%;
-    margin: 0 4px;
-}
-
-.gallery-swiper-pagination .swiper-pagination-bullet-active {
-    opacity: 1;
-    transform: scale(1.3);
+/* Flutuação dos ícones decorativos do blog CTA */
+@keyframes blog-float {
+    0%, 100% { transform: translateY(0)    rotate(0deg); }
+    50%       { transform: translateY(-16px) rotate(8deg); }
 }
 
 
+/* ============================================================
+ *  20. MEDIA QUERIES RESPONSIVAS
+ *
+ *  Estratégia mobile-first:
+ *  — Estilos base atendem mobile (<768px).
+ *  — Cada breakpoint incrementa para telas maiores.
+ *
+ *  Breakpoints utilizados:
+ *  — 768px  → Tablet
+ *  — 1024px → Desktop
+ *
+ *  Todos os blocos @media (max-width: 767px) foram consolidados
+ *  em uma única regra para facilitar a manutenção.
+ * ============================================================ */
 
-/* Layout geral: 2 colunas, steps horizontal e footer — a partir de 768px */
+/* ----------------------------------------------------------
+ *  Tablet e acima (≥768px)
+ * ---------------------------------------------------------- */
 @media (min-width: 768px) {
+
+    /* Grid de benefícios: 2 colunas */
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Steps em linha horizontal */
     .steps-container {
         flex-direction: row;
         justify-content: space-around;
         align-items: flex-start;
     }
 
+    /* Footer em linha horizontal */
     .footer-content {
         flex-direction: row;
         justify-content: space-between;
         text-align: left;
     }
-}
 
-/* Hero com imagem lateral — apenas a partir de 1024px */
-@media (min-width: 1024px) {
-    /* Hero: grid full-bleed — imagem ocupa da borda esquerda até o texto */
-    #hero {
-        min-height: calc(100vh - var(--header-height));
-        display: flex;
-        align-items: stretch;
+    /* Swiper oculto — grid da galeria retorna */
+    .gallery-swiper {
+        display: none !important; /* sobrescreve eventual ativação via JS */
     }
 
-    .hero-container {
-        flex-direction: row;
-        align-items: stretch;
-        text-align: left;
-        gap: 0;
-        min-height: calc(100vh - var(--header-height));
-    }
-
-    /* Imagem: ~55% da largura total, sem padding lateral esquerdo */
-    .hero-image {
-        flex: 0 0 55%;
-        max-width: 55%;
-        padding: 0;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .hero-illustration {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        align-self: flex-end;
-    }
-
-    /* Texto: ocupa o restante, com padding interno */
-    .hero-text {
-        flex: 1;
-        justify-content: center;
-        padding: 60px 5% 60px 40px;
-        gap: 16px;
-    }
-
-    .hero-text h1 {
-        font-size: 2.8rem;
-    }
-
-    .benefits-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .hero-text h1 {
-        font-size: 3.2rem;
-    }
-
-    .hero-text {
-        padding: 60px 8% 60px 50px;
+    .gallery-grid {
+        display: grid;
     }
 }
 
-/* Oculta imagem do hero em mobile e tablets (abaixo de 1024px) */
-@media (max-width: 1023px) {
-    .hero-image {
-        display: none !important;
-    }
-
-    .hero-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - var(--header-height));
-    }
-
-    .hero-text {
-        width: 100%;
-        text-align: center;
-        align-items: center;
-        padding: 40px 24px 50px;
-    }
-
-    .hero-text h1 {
-        font-size: 2rem;
-    }
-}
-
-/* Tablet (768px - 1023px) */
+/* ----------------------------------------------------------
+ *  Tablet (768px – 1023px)
+ * ---------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1023px) {
+
     /* Hero */
     .hero-text {
         padding: 60px 40px 70px;
@@ -1073,7 +1126,7 @@ footer {
         font-size: 2rem;
     }
 
-    /* Seções — distribui o espaço vertical */
+    /* Seções internas com padding lateral mais generoso */
     #diferenciais,
     #galeria,
     #como-funciona,
@@ -1099,26 +1152,140 @@ footer {
     }
 }
 
-/* Menu Mobile Responsivo */
+/* ----------------------------------------------------------
+ *  Desktop (≥1024px)
+ * ---------------------------------------------------------- */
+@media (min-width: 1024px) {
+
+    /* Hero: layout de duas colunas (imagem + texto) */
+    #hero {
+        min-height: calc(100vh - var(--header-height));
+        display: flex;
+        align-items: stretch;
+    }
+
+    .hero-container {
+        flex-direction: row;
+        align-items: stretch;
+        text-align: left;
+        gap: 0;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Imagem: ~55% da largura, toca a borda esquerda */
+    .hero-image {
+        flex: 0 0 55%;
+        max-width: 55%;
+        padding: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .hero-illustration {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        align-self: flex-end;
+    }
+
+    /* Texto: ocupa o espaço restante */
+    .hero-text {
+        flex: 1;
+        justify-content: center;
+        padding: 60px 8% 60px 50px;
+        gap: 16px;
+    }
+
+    /* Tamanho final do h1 no desktop (único valor — duplicata removida) */
+    .hero-text h1 {
+        font-size: 3.2rem;
+    }
+
+    /* Grid de benefícios: 4 colunas no desktop */
+    .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Blog CTA: tipografia maior */
+    #blog-cta h2 {
+        font-size: 3rem;
+    }
+
+    .blog-cta-accent {
+        font-size: 3.2rem;
+    }
+
+    .blog-cta-lead {
+        font-size: 1.15rem;
+    }
+}
+
+/* ----------------------------------------------------------
+ *  Mobile (< 1024px) — oculta imagem do hero
+ *
+ *  A imagem do hero é ornamental no mobile; ocultá-la libera
+ *  espaço valioso e reduz o peso da página em telas pequenas.
+ *  O display:none aqui é intencional e declarado explicitamente
+ *  para evitar conflito com o display:flex definido no desktop.
+ * ---------------------------------------------------------- */
+@media (max-width: 1023px) {
+    .hero-image {
+        display: none;
+    }
+
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .hero-text {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        padding: 40px 24px 50px;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+}
+
+/* ----------------------------------------------------------
+ *  Mobile (< 768px)
+ *  Todos os ajustes exclusivos de mobile consolidados aqui.
+ * ---------------------------------------------------------- */
 @media (max-width: 767px) {
+
+    /* Menu hamburger visível */
     .hamburger {
         display: block;
     }
 
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    /* Animação do ícone hamburger → X ao abrir */
     .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
+    /* Menu deslizante pelo lado esquerdo.
+       top usa a variável --header-height para manter sincronia
+       caso a altura do header seja alterada futuramente. */
     .nav-list {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: var(--header-height);
         flex-direction: column;
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        /* Transição apenas na propriedade "left" — evita custo de "transition: all" */
+        transition: left var(--transition-speed);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
         padding: 20px 0;
     }
 
@@ -1130,26 +1297,19 @@ footer {
         margin: 15px 0;
     }
 
+    /* Instagram CTA ocupa tela cheia no mobile */
     #instagram-cta {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-}
-/* ── Swiper visível no mobile, grid oculto ── */
-@media (max-width: 767px) {
-    .gallery-swiper {
-        display: block;
-    }
 
-    .gallery-swiper-pagination {
-        display: block;
-    }
-
-    .gallery-grid {
-        display: none;
-    }
+    /* Galeria mobile: swiper substitui o grid */
+    .gallery-swiper           { display: block; }
+    .gallery-swiper-pagination { display: block; }
+    .gallery-grid              { display: none; }
+    .swiper-hint               { display: block; }
 
     #galeria {
         min-height: 100vh;
@@ -1157,31 +1317,32 @@ footer {
         flex-direction: column;
         justify-content: center;
     }
-}
 
-/* ── No tablet/desktop o swiper some e o grid volta ── */
-@media (min-width: 768px) {
-    .gallery-swiper {
-        display: none !important;
+    /* Blog CTA — redução da tipografia em mobile */
+    #blog-cta h2 {
+        font-size: 1.9rem;
     }
 
-    .gallery-grid {
-        display: grid;
+    .blog-cta-accent {
+        font-size: 2rem;
     }
-}
-/* Hint de arrastar — visível apenas no mobile junto ao swiper */
-.swiper-hint {
-    display: none;
-    text-align: center;
-    font-size: 1.1rem;
-    color: var(--primary-dark);
-    opacity: 0.6;
-    margin-top: 6px;
-    letter-spacing: 0.03em;
+
+    .blog-cta-lead {
+        font-size: 1rem;
+    }
 }
 
-@media (max-width: 767px) {
-    .swiper-hint {
-        display: block;
-    }
+
+/* ============================================================
+ *  21. ACESSIBILIDADE — prefers-reduced-motion
+ *
+ *  Respeita a preferência do sistema por menos movimento,
+ *  desativando animações e transições decorativas.
+ *  Ref: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+ * ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .modal-content          { animation: none; }
+    .testimonial            { animation: none; }
+    .reveal                 { transition: none; }
+    .hero-image .slide      { transition: none; }
 }
