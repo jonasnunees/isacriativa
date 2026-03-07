@@ -35,10 +35,6 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 /* ===================
    Body
    =================== */
@@ -85,7 +81,6 @@ main {
 .stars {
     font-size: 2.2rem;
     margin-bottom: 12px;
-    animation: bounceIn 0.6s ease-out;
 }
 
 .stars i {
@@ -130,7 +125,7 @@ h1 {
     text-align: left;
 }
 
-.instruction-card .card-title {
+.card-title {
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -329,10 +324,6 @@ h1 { animation-delay: 0.1s; }
 
 /* Acessibilidade: respeita preferência do sistema por menos movimento */
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
     .stars i,
     .instruction-card,
     .cta-btn,
