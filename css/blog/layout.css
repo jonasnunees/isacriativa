@@ -1,0 +1,27 @@
+/* ===================
+   layout.css
+   Seção #blog-body e grid de duas colunas (main + sidebar).
+   A media query de sidebar ao lado fica aqui, junto ao contexto.
+   =================== */
+
+#blog-body {
+    padding: 70px 0 100px;
+    background-color: white;
+}
+
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+/* Sidebar ao lado em telas maiores */
+@media (min-width: 960px) {
+    .blog-layout {
+        grid-template-columns: 1fr 300px;
+        align-items: start;
+    }
+}

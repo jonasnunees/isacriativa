@@ -1,0 +1,192 @@
+/* ===================
+   sidebar.css
+   Sidebar do blog: todos os widgets (CTA, categorias, tags,
+   Instagram, newsletter/WhatsApp).
+   =================== */
+
+.blog-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ---- Widget base ---- */
+.sidebar-widget {
+    background-color: var(--bg-gray);
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-widget h3 {
+    font-size: 1rem;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* ---- Widget CTA (fundo degradê) ---- */
+.sidebar-cta {
+    background: linear-gradient(
+        135deg,
+        var(--color-sidebar-cta-start) 0%,
+        var(--color-sidebar-cta-end) 100%
+    );
+    border: none;
+    text-align: center;
+}
+
+.sidebar-cta h3 {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-cta p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.93rem;
+    margin-bottom: 16px;
+}
+
+.sidebar-cta-btn {
+    font-size: 0.92rem;
+    padding: 10px 20px;
+}
+
+/* ---- Widget Categorias ---- */
+.sidebar-categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-cat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: left;
+    width: 100%;
+}
+
+.sidebar-cat-item:hover {
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+}
+
+.sidebar-cat-item:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
+.sidebar-cat-count {
+    background: var(--primary-color);
+    color: var(--primary-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 10px;
+}
+
+/* ---- Widget Tags ---- */
+.sidebar-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: var(--primary-color);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    font-family: var(--font-main);
+}
+
+.tag:hover {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+.tag:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
+/* ---- Widget Instagram ---- */
+.sidebar-instagram {
+    text-align: center;
+}
+
+.sidebar-instagram-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-mid1),
+        var(--color-instagram-mid2),
+        var(--color-instagram-mid3),
+        var(--color-instagram-end)
+    );
+    color: white;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+}
+
+.instagram-btn:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 30px;
+}
+
+/*
+ * Nota: .newsletter-form (input de e-mail) existia no blog.css original
+ * mas o HTML já usa apenas um link de WhatsApp — código morto, não incluído.
+ */
+
+/* ---- Widget Newsletter / WhatsApp ---- */
+.sidebar-newsletter-text {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.sidebar-newsletter-btn {
+    font-size: 0.88rem;
+    padding: 10px 20px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}

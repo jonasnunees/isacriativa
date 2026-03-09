@@ -1,0 +1,58 @@
+/* ===================
+   responsive.css
+   Ajustes mobile — breakpoints exclusivos do blog
+   (as media queries internas de layout, grid e post-featured
+   ficam em seus próprios arquivos, junto ao contexto).
+   =================== */
+
+/* ---- Tablet e acima: mostra nav, esconde hamburger ---- */
+@media (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+}
+
+/* ---- Mobile (< 768px) ---- */
+@media (max-width: 767px) {
+
+    /* Hamburger visível */
+    .hamburger {
+        display: block;
+    }
+
+    /* Animação do ícone quando ativo */
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px)  rotate(45deg);  }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Menu dropdown mobile */
+    .nav-list {
+        position: fixed;
+        left: -100%;
+        top: var(--header-height);
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: left var(--transition-speed);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+    }
+
+    .nav-list.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 15px 0;
+    }
+
+    /* Tipografia do hero reduzida */
+    #blog-hero h1 {
+        font-size: 2rem;
+    }
+
+    .post-featured-title {
+        font-size: 1.3rem;
+    }
+}

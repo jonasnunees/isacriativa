@@ -1,0 +1,50 @@
+/* ===================
+   animations.css
+   Scroll reveal, animação de entrada dos cards e
+   respeito à preferência de movimento reduzido.
+   =================== */
+
+/* ---- Reveal ao rolar a página (ativado via JS) ---- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---- Animação de entrada dos cards (ativada via JS) ---- */
+.blog-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.blog-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---- Acessibilidade: sem animações ---- */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .post-featured,
+    .post-card,
+    .blog-card,
+    .blog-load-more {
+        transition: none;
+    }
+
+    .blog-card {
+        opacity: 1;
+        transform: none;
+    }
+}

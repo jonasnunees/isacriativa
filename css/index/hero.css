@@ -1,0 +1,91 @@
+/* ===================
+   hero.css
+   Seção hero — layout full-bleed mobile-first
+   =================== */
+
+#hero {
+    padding: 0;
+    background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 60%, #e0f7fa 100%);
+    overflow: hidden;
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: stretch;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 .5em;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.hero-image {
+    width: 100%;
+    padding: 30px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.hero-illustration {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 24px rgba(240, 98, 146, 0.18));
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 40px 28px 60px;
+}
+
+.hero-text h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.hero-title-main {
+    display: block;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.hero-title-accent {
+    display: block;
+    color: var(--primary-dark);
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.8;
+}
+
+.hero-tagline {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 4px 0 8px;
+}

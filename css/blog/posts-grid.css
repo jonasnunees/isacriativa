@@ -1,0 +1,143 @@
+/* ===================
+   posts-grid.css
+   Grid de cards de posts, estado vazio e botão "carregar mais".
+   =================== */
+
+/* ---- Grid ---- */
+.posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 540px) {
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ---- Card de post ---- */
+.post-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-gray);
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.post-card:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 3px;
+}
+
+/* Filtrado via JS: oculta o card */
+.post-card[aria-hidden="true"] {
+    display: none;
+}
+
+.post-card-thumb {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.post-card-body {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+}
+
+.post-card-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.post-card-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+    flex: 1;
+}
+
+.post-card-meta {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.post-card-meta i {
+    color: var(--primary-dark);
+    margin-right: 3px;
+}
+
+/* ---- Estado vazio (sem resultados) ---- */
+.posts-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+}
+
+.posts-empty i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.posts-empty p {
+    font-size: 1.05rem;
+}
+
+/* ---- Botão "Carregar mais" ---- */
+.blog-load-more {
+    margin: 40px auto;
+    display: block;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: none;
+    background: var(--primary-dark);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.blog-load-more:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
+/* ---- Paginação (referência para uso futuro) ---- */
+.blog-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 50px;
+}

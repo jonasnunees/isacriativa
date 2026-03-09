@@ -1,0 +1,39 @@
+/* ===================
+   benefits.css
+   Seção de benefícios / diferenciais
+   =================== */
+
+#beneficios {
+    padding: 80px 0;
+    background-color: white;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: var(--bg-gray);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform var(--transition-speed);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.benefit-card i {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.benefit-card h3 {
+    margin-bottom: 10px;
+}

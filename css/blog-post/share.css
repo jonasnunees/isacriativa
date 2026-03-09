@@ -1,0 +1,48 @@
+/* ===================
+   share.css
+   Barra de compartilhamento do post (WhatsApp e Instagram).
+   =================== */
+
+.post-share {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-post-border);
+}
+
+.post-share strong {
+    color: var(--text-dark);
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.92rem;
+    transition: transform var(--transition-speed);
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+}
+
+.share-whatsapp {
+    background: var(--color-whatsapp);
+    color: white;
+}
+
+.share-instagram {
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-end)
+    );
+    color: white;
+}

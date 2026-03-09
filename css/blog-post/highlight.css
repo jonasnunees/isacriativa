@@ -1,0 +1,13 @@
+/* ===================
+   highlight.css
+   Bloco de destaque (.post-highlight) — citação ou dica em evidência.
+   =================== */
+
+.post-highlight {
+    background: linear-gradient(135deg, #fff0f5 0%, #e8f5e9 100%);
+    border-left: 4px solid var(--primary-dark);
+    border-radius: 0 14px 14px 0;
+    padding: 20px 26px;
+    margin: 32px 0;
+    font-style: italic;
+}

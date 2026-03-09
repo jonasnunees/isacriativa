@@ -1,0 +1,21 @@
+/* ==========================================================
+   avaliar.css — Arquivo de entrada
+   Isa Criativa | isacriativa.com.br
+
+   Importa os estilos globais e os específicos desta página.
+   No HTML, chame apenas este arquivo.
+   ========================================================== */
+
+/* --- Globais --- */
+@import url('../reset.css');
+@import url('../global.css');
+
+/* --- Específicos da página --- */
+@import url('variables.css');
+@import url('body.css');
+@import url('header.css');
+@import url('footer.css');
+@import url('main.css');
+@import url('typography.css');
+@import url('components.css');
+@import url('animations.css');

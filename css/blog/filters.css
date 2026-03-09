@@ -1,0 +1,84 @@
+/* ===================
+   filters.css
+   Botões de filtro por categoria e linha de resultado da busca.
+   =================== */
+
+/* ---- Filtros ---- */
+.blog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 2px solid rgba(240, 98, 146, 0.25);
+    background: white;
+    color: var(--text-dark);
+    font-family: var(--font-main);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: white;
+}
+
+.filter-btn:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
+.filter-count {
+    background: rgba(255, 255, 255, 0.3);
+    color: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.filter-btn.active .filter-count {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.filter-btn:not(.active) .filter-count {
+    background: var(--primary-color);
+    color: var(--primary-dark);
+}
+
+/* ---- Resultado da busca ---- */
+.blog-results-info {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    min-height: 1.4em;
+}
+
+.blog-results-info strong {
+    color: var(--primary-dark);
+}
+
+/* ---- Contador genérico (adicionado via JS) ---- */
+.blog-counter {
+    margin-bottom: 20px;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+}

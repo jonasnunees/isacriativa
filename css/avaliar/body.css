@@ -1,0 +1,9 @@
+/* ===================
+   body.css
+   Fundo e base do body — específico desta página
+   =================== */
+
+body {
+    background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 50%, #e8eaf6 100%);
+    min-height: 100vh;
+}

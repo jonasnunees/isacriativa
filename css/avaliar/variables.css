@@ -1,0 +1,17 @@
+/* ===================
+   variables.css
+   Variáveis específicas da página avaliar
+   =================== */
+
+:root {
+    --color-star:              #ffc107;
+    --color-step-pink-bg:      #fce4ec;
+    --color-step-purple-bg:    #f3e5f5;
+    --color-step-purple-icon:  #8e24aa;
+    --color-step-green-bg:     #e8f5e9;
+    --color-step-green-icon:   #2e7d32;
+    --color-divider-line:      #f0d8e4;
+    --color-google-g:          #4285f4;
+    --color-dots-bg:           #f5f5f5;
+    --color-dots-icon:         #888888;
+}

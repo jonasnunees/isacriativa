@@ -1,0 +1,85 @@
+/* ===================
+   components.css
+   Componente "Em breve" — exclusivo desta página
+   =================== */
+
+.coming-soon-wrapper {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.coming-soon-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 32px rgba(240, 98, 146, 0.08);
+    padding: 3rem 2.5rem;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+}
+
+.coming-soon-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    animation: bounce 2.2s ease-in-out infinite;
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: #880e4f;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
+.coming-soon-title {
+    font-family: var(--font-main);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.35;
+    margin-bottom: 1rem;
+}
+
+.coming-soon-text {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+}
+
+.coming-soon-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gradient-brand);
+    color: #fff;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.coming-soon-back:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.coming-soon-back:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: 3px;
+    opacity: 0.9;
+    transform: translateY(-2px);
+}

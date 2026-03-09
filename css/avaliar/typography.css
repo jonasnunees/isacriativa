@@ -1,0 +1,50 @@
+/* ===================
+   typography.css
+   Tipografia específica da página avaliar
+   =================== */
+
+h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--primary-deeper);
+    line-height: 1.25;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.card-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.note {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.note i {
+    color: var(--primary-dark);
+    margin-right: 4px;
+}
+
+.thank-you {
+    margin-top: 36px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.thank-you strong {
+    color: var(--primary-dark);
+}

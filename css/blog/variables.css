@@ -1,0 +1,19 @@
+/* ===================
+   variables.css
+   Tokens específicos da página do blog.
+   Complementam o :root definido em global.css.
+   =================== */
+
+:root {
+    --color-sidebar-cta-start:   #ad1457;
+    --color-sidebar-cta-end:     #6a1b9a;
+    --color-instagram-start:     #f09433;
+    --color-instagram-mid1:      #e6683c;
+    --color-instagram-mid2:      #dc2743;
+    --color-instagram-mid3:      #cc2366;
+    --color-instagram-end:       #bc1888;
+    --color-search-border:       rgba(240, 98, 146, 0.25);
+    --color-search-focus-shadow: rgba(240, 98, 146, 0.15);
+    --color-placeholder:         #bbbbbb;
+    --color-footer-privacy:      #cccccc;
+}

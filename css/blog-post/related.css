@@ -1,0 +1,77 @@
+/* ===================
+   related.css
+   Seção de artigos relacionados ao final do post.
+   =================== */
+
+#artigos-relacionados {
+    margin-top: 54px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-post-border);
+}
+
+#artigos-relacionados h2 {
+    font-size: 1.45rem;
+    color: var(--primary-dark);
+    margin-bottom: 22px;
+}
+
+/* ---- Grid ---- */
+.related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 600px) {
+    .related-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ---- Card ---- */
+.related-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-gray);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.related-card:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 3px;
+}
+
+.related-card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.related-card-body {
+    padding: 14px 16px 18px;
+}
+
+.related-card-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+}
+
+.related-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+}

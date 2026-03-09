@@ -1,0 +1,17 @@
+/* ===================
+   header.css
+   Header específico desta página — estático, sem fixed
+   =================== */
+
+header {
+    position: static;
+    background-color: #ffffff;
+    backdrop-filter: none;
+    padding: 15px 0;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

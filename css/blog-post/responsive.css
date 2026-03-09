@@ -1,0 +1,29 @@
+/* ===================
+   responsive.css
+   Ajustes mobile do template de post.
+   (As media queries internas de layout e related-grid
+   ficam nos seus próprios arquivos, junto ao contexto.)
+   =================== */
+
+@media (max-width: 500px) {
+
+    /* Título do hero menor */
+    .post-hero-title {
+        font-size: 1.85rem;
+    }
+
+    /* Navegação entre posts em coluna única */
+    .post-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .post-nav-item.next {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    /* CTA final com menos padding lateral */
+    #cta-final-post {
+        padding: 32px 22px;
+    }
+}

@@ -1,0 +1,170 @@
+/* ===================
+   components.css
+   Componentes específicos da página avaliar
+   =================== */
+
+main > * {
+    width: 100%;
+}
+
+main > h1,
+main > p,
+main > .stars {
+    text-align: center;
+}
+
+
+.stars {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.stars i {
+    color: var(--color-star);
+    display: inline-block;
+    animation: starPop 0.4s ease-out both;
+}
+
+.stars i:nth-child(1) { animation-delay: 0.1s; }
+.stars i:nth-child(2) { animation-delay: 0.2s; }
+.stars i:nth-child(3) { animation-delay: 0.3s; }
+.stars i:nth-child(4) { animation-delay: 0.4s; }
+.stars i:nth-child(5) { animation-delay: 0.5s; }
+
+/* ---- Card de instrução ---- */
+.instruction-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 8px 30px rgba(240, 98, 146, 0.12);
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.step-row:last-child {
+    margin-bottom: 0;
+}
+
+.step-icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.step-icon.pink   { background: var(--color-step-pink-bg);   color: var(--primary-dark);            }
+.step-icon.purple { background: var(--color-step-purple-bg); color: var(--color-step-purple-icon);  }
+.step-icon.green  { background: var(--color-step-green-bg);  color: var(--color-step-green-icon);   }
+
+.step-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.step-text span {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* ---- Dots (ilustração do menu) ---- */
+.dots-preview {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    background: var(--color-dots-bg);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-top: 6px;
+}
+
+.dots-preview span {
+    width: 5px;
+    height: 5px;
+    background: var(--color-dots-icon);
+    border-radius: 50%;
+    display: block;
+    color: transparent;
+    font-size: 0;
+}
+
+/* ---- Divider ---- */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 28px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-divider-line);
+}
+
+/* ---- Botão principal ---- */
+.cta-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 14px 0;
+    padding: 16px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 1.05rem;
+    background: var(--primary-dark);
+    color: white;
+    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(240, 98, 146, 0.45);
+}
+
+.cta-btn:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+/* ---- Ícone Google G ---- */
+.google-g {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--color-google-g);
+    flex-shrink: 0;
+}

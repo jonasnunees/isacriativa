@@ -1,0 +1,11 @@
+/* ===================
+   variables.css
+   Variáveis complementares ao global.css
+   =================== */
+
+:root {
+    --secondary-color:    #b3e5fc; /* Azul pastel — uso complementar            */
+    --accent-color:       #e1bee7; /* Lilás pastel — numeração de steps         */
+    --bg-gray:            #fdfbfb; /* Fundo de cards e seções alternadas        */
+    --text-muted-on-dark: #cccccc; /* Texto discreto sobre fundos escuros       */
+}

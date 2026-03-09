@@ -1,0 +1,37 @@
+/* ===================
+   animations.css
+   Animações específicas da página avaliar
+   =================== */
+
+@keyframes starPop {
+    0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+    70%  { transform: scale(1.2) rotate(5deg); }
+    100% { transform: scale(1) rotate(0);      opacity: 1; }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+.instruction-card { animation: fadeUp 0.5s ease-out both; animation-delay: 0.3s;  }
+.cta-btn          { animation: fadeUp 0.5s ease-out both; animation-delay: 0.45s; }
+.note             { animation: fadeUp 0.5s ease-out both; animation-delay: 0.55s; }
+h1                { animation: fadeUp 0.5s ease-out both; animation-delay: 0.1s;  }
+.subtitle         { animation: fadeUp 0.5s ease-out both; animation-delay: 0.2s;  }
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    .stars i,
+    .instruction-card,
+    .cta-btn,
+    .note,
+    h1,
+    .subtitle {
+        animation: none;
+    }
+
+    .cta-btn {
+        transition: none;
+    }
+}

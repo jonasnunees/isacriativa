@@ -1,0 +1,8 @@
+/* ===================
+   main.css
+   Layout da área de conteúdo principal
+   =================== */
+
+#main-content {
+    padding-top: var(--header-height);
+}

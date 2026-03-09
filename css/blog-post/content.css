@@ -1,0 +1,52 @@
+/* ===================
+   content.css
+   Tipografia do corpo do artigo (.post-content).
+   Salvaguarda crítica contra .reveal do global.css também fica aqui:
+   o conteúdo do post deve ser sempre visível, mesmo sem JS.
+   =================== */
+
+/* Salvaguarda: .reveal do global começa com opacity:0.
+   Garante visibilidade independente de JS. */
+.post-content,
+.post-sidebar {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* ---- Corpo do artigo ---- */
+.post-content {
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: var(--text-dark);
+}
+
+.post-content h2 {
+    font-size: 1.65rem;
+    color: var(--primary-dark);
+    margin: 44px 0 16px;
+    line-height: 1.3;
+}
+
+.post-content h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin: 32px 0 12px;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+}
+
+.post-content ul,
+.post-content ol {
+    margin: 0 0 22px 24px;
+}
+
+.post-content li {
+    margin-bottom: 9px;
+}
+
+.post-content strong {
+    color: var(--text-dark);
+}

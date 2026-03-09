@@ -1,0 +1,71 @@
+/* ===================
+   buttons.css
+   .cta-btn, .primary-btn, .secondary-btn e .btn-instagram.
+   Usados no CTA inline, CTA final e sidebar.
+   =================== */
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary-btn {
+    background-color: var(--primary-dark);
+    color: white;
+    box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.4);
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--primary-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Botão Instagram ---- */
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-mid1),
+        var(--color-instagram-mid2),
+        var(--color-instagram-mid3),
+        var(--color-instagram-end)
+    );
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.btn-instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.28);
+}
+
+.btn-instagram:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}

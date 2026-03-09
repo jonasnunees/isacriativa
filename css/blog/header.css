@@ -1,0 +1,57 @@
+/* ===================
+   header.css
+   Navegação principal do blog.
+   O header fixo (#header) e o .logo já vêm do global.css.
+   Aqui ficam: nav-list, nav-link, hamburger e barras.
+   =================== */
+
+/* Correção de herança de cor nos links do logo */
+a.logo,
+a.logo:visited,
+a.logo:hover {
+    text-decoration: none;
+    color: var(--primary-dark);
+}
+
+/* ---- Navegação ---- */
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: color var(--transition-speed);
+}
+
+.nav-link:hover {
+    color: var(--primary-dark);
+}
+
+/* ---- Hamburger ---- */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.hamburger:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--primary-dark);
+    transition: transform var(--transition-speed) ease-in-out,
+                opacity  var(--transition-speed) ease-in-out;
+}

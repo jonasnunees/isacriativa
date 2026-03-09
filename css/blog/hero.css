@@ -1,0 +1,82 @@
+/* ===================
+   hero.css
+   Seção hero do blog: badge, título, subtítulo e barra de busca.
+   =================== */
+
+#blog-hero {
+    padding: 130px 0 70px;
+    background: linear-gradient(135deg, #fff0f5 0%, #e0f7fa 100%);
+    text-align: center;
+}
+
+.blog-hero-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.blog-hero-badge {
+    display: inline-block;
+    background-color: var(--primary-dark);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 20px;
+}
+
+#blog-hero h1 {
+    font-size: 2.6rem;
+    line-height: 1.2;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+}
+
+#blog-hero p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+/* ---- Barra de busca ---- */
+.blog-search-wrap {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.blog-search-wrap i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+#blog-search {
+    width: 100%;
+    padding: 14px 18px 14px 46px;
+    border: 2px solid var(--color-search-border);
+    border-radius: 40px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: var(--text-dark);
+    background: white;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+#blog-search:focus {
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 3px var(--color-search-focus-shadow);
+}
+
+#blog-search::placeholder {
+    color: var(--color-placeholder);
+}

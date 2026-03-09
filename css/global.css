@@ -1,0 +1,300 @@
+/* ==========================================================
+   global.css — Estilos globais compartilhados
+   Isa Criativa | isacriativa.com.br
+
+   Índice:
+   1.  Design Tokens (variáveis)
+   2.  Base (html, body)
+   3.  Layout (.container)
+   4.  Tipografia (logo, títulos)
+   5.  Header
+   6.  Footer
+   7.  WhatsApp Flutuante
+   8.  Utilitários (.sr-only, .reveal, a.logo)
+   9.  Acessibilidade (prefers-reduced-motion)
+   ========================================================== */
+
+
+/* ==========================================================
+   1. DESIGN TOKENS
+   ========================================================== */
+:root {
+    /* --- Paleta principal --- */
+    --primary-color:      #f8bbd0; /* Rosa pastel — bordas, destaques suaves   */
+    --primary-dark:       #f06292; /* Rosa escuro — botões, links, ícones       */
+    --primary-deeper:     #c2185b; /* Rosa intenso — headings de destaque       */
+    --accent:             #e1bee7; /* Lilás pastel — numeração de steps, etc.   */
+
+    /* --- Cores de texto --- */
+    --text-dark:          #4a4a4a; /* Texto principal                           */
+    --text-light:         #7a7a7a; /* Texto secundário / descrições             */
+    --text-muted-on-dark: #cccccc; /* Texto discreto sobre fundos escuros       */
+
+    /* --- Fundos --- */
+    --bg-light:           #fffcfd; /* Fundo geral da página                     */
+    --bg-gray:            #fdfbfb; /* Fundo de cards e seções alternadas        */
+
+    /* --- Tipografia --- */
+    --font-main:          'Nunito', sans-serif;
+    --font-logo:          'Pacifico', cursive;
+
+    /* --- Gradiente de marca (rosa → roxo)
+         Reutilizado em seções de destaque e CTAs. --- */
+    --gradient-brand: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
+
+    /* --- Transições --- */
+    --transition-speed:   0.3s;
+
+    /* --- Elementos específicos --- */
+    --color-whatsapp:     #25d366;
+    --header-height:      70px;
+}
+
+
+/* ==========================================================
+   2. BASE
+   ========================================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================
+   3. LAYOUT
+   ========================================================== */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* ==========================================================
+   4. TIPOGRAFIA
+   ========================================================== */
+
+/* Logo — sempre Pacifico, rosa escuro, sem sublinhado */
+.logo,
+a.logo,
+a.logo:visited,
+a.logo:hover {
+    font-family: var(--font-logo);
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.logo:focus-visible,
+a.logo:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+/* ==========================================================
+   5. HEADER
+   ========================================================== */
+#header,
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+/* Link de voltar ao blog / breadcrumb de navegação */
+.post-back-link,
+.back-link {
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color var(--transition-speed);
+}
+
+.post-back-link:hover,
+.back-link:hover {
+    color: var(--primary-dark);
+}
+
+
+/* ==========================================================
+   6. FOOTER
+   ========================================================== */
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-muted-on-dark);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.footer-brand .logo {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.footer-brand p {
+    font-size: 0.95rem;
+    color: var(--text-muted-on-dark);
+    margin-top: 8px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-social a {
+    color: var(--text-muted-on-dark);
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.footer-social a:hover {
+    color: var(--primary-dark);
+}
+
+.footer-social a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-muted-on-dark);
+}
+
+.footer-privacy-link {
+    color: var(--text-muted-on-dark);
+    text-decoration: underline;
+}
+
+.footer-privacy-link:hover {
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+
+/* ==========================================================
+   7. WHATSAPP FLUTUANTE
+   ========================================================== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--color-whatsapp);
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: transform var(--transition-speed);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   8. UTILITÁRIOS
+   ========================================================== */
+
+/* Visível apenas para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Scroll reveal — elementos entram em tela via JS (.active) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Links genéricos com foco visível */
+a:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+
+/* ==========================================================
+   9. ACESSIBILIDADE — prefers-reduced-motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        transition: none;
+    }
+
+    .whatsapp-float {
+        transition: none;
+    }
+}
