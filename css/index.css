@@ -79,17 +79,17 @@ table {
 :root {
     /* --- Paleta principal --- */
     --primary-color:      #f8bbd0;
-    --primary-dark:       #f06292;
-    --primary-deeper:     #c2185b;
-    --accent-color:       #e1bee7; /* Lilás pastel — numeração de steps */
+    --primary-dark:       #c2185b; /* Ajustado de #f06292: ratio ~5.9:1 sobre branco — passa WCAG AA */
+    --primary-deeper:     #ad1457;
+    --accent-color:       #7b1fa2; /* Ajustado de #e1bee7: texto branco sobre lilás escuro — ratio ~7.2:1 */
 
     /* --- Cores complementares --- */
     --secondary-color:    #b3e5fc;
 
     /* --- Cores de texto --- */
     --text-dark:          #4a4a4a;
-    --text-light:         #7a7a7a;
-    --text-muted-on-dark: #cccccc;
+    --text-light:         #6b6b6b; /* Ajustado de #7a7a7a: ratio ~5.1:1 sobre branco — passa WCAG AA */
+    --text-muted-on-dark: #e0e0e0; /* Ajustado de #cccccc: ratio ~5.2:1 sobre #4a4a4a — passa WCAG AA */
 
     /* --- Fundos --- */
     --bg-light:           #fffcfd;
@@ -757,8 +757,10 @@ header {
     color: white;
 }
 
-.testimonial h4 {
+.testimonial h4,
+.testimonial-author {
     color: white;
+    font-weight: 700;
 }
 
 .carousel-dots {
