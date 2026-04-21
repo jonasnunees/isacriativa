@@ -223,6 +223,7 @@
 
         function mountSwiper() {
             if (window.innerWidth < 768 && !swiperInstance) {
+                if (typeof Swiper === 'undefined') return;
                 swiperInstance = new Swiper('.gallery-swiper', {
                     grabCursor: true,
                     slidesPerView: 1,
