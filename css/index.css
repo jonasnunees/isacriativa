@@ -562,6 +562,8 @@ header {
     outline-offset: 2px;
 }
 
+/* Swiper: injetado via JS condicionalmente — ver initGallerySwiper() em script.js */
+
 /* Swiper mobile */
 .gallery-swiper-wrapper {
     overflow: hidden;

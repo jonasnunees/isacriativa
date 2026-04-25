@@ -212,30 +212,52 @@
 
     /**
      * 6. Swiper da Galeria (Mobile)
-     * Inicializa o SwiperJS apenas em telas < 768px.
-     * Destrói e recria ao redimensionar (ex: rotação de tela).
+     * Injeta CSS e JS do Swiper dinamicamente APENAS em telas < 768px.
+     * Destrói e recria ao redimensionar (com debounce para evitar reflow excessivo).
      */
     function initGallerySwiper() {
         const swiperEl = document.querySelector('.gallery-swiper');
         if (!swiperEl) return;
 
         let swiperInstance = null;
+        let swiperLoaded   = false;
+        let resizeTimer;
+
+        function injectSwiperAssets() {
+            return new Promise((resolve) => {
+                if (swiperLoaded) { resolve(); return; }
+
+                // Injeta CSS
+                const link = document.createElement('link');
+                link.rel  = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+                document.head.appendChild(link);
+
+                // Injeta JS
+                const script  = document.createElement('script');
+                script.src    = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+                script.onload = () => { swiperLoaded = true; resolve(); };
+                document.head.appendChild(script);
+            });
+        }
 
         function mountSwiper() {
             if (window.innerWidth < 768 && !swiperInstance) {
-                if (typeof Swiper === 'undefined') return;
-                swiperInstance = new Swiper('.gallery-swiper', {
-                    grabCursor: true,
-                    slidesPerView: 1,
-                    loop: true,
-                    pagination: {
-                        el: '.gallery-swiper-pagination',
-                        clickable: true,
-                    },
-                    a11y: {
-                        prevSlideMessage: 'Foto anterior',
-                        nextSlideMessage: 'Próxima foto',
-                    },
+                injectSwiperAssets().then(() => {
+                    if (swiperInstance) return; // evita dupla instância em race condition
+                    swiperInstance = new Swiper('.gallery-swiper', {
+                        grabCursor: true,
+                        slidesPerView: 1,
+                        loop: true,
+                        pagination: {
+                            el: '.gallery-swiper-pagination',
+                            clickable: true,
+                        },
+                        a11y: {
+                            prevSlideMessage: 'Foto anterior',
+                            nextSlideMessage: 'Próxima foto',
+                        },
+                    });
                 });
             } else if (window.innerWidth >= 768 && swiperInstance) {
                 swiperInstance.destroy(true, true);
@@ -244,7 +266,12 @@
         }
 
         mountSwiper();
-        window.addEventListener('resize', mountSwiper);
+
+        // Debounce no resize para evitar reflow forçado repetitivo
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(mountSwiper, 150);
+        });
     }
 
     // ─── Ponto de entrada ──────────────────────────────────────────────────────

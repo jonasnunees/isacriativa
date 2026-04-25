@@ -75,15 +75,22 @@
     }
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P7ZTHRQQ');</script>
+    <!-- Google Tag Manager: adiado para após o evento load (não bloqueia renderização) -->
+    <script>
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-P7ZTHRQQ');
+        }, 2000);
+    });
+    </script>
     <!-- Fim Google Tag Manager -->
 
     <!-- Fontes Google: preconnect + carregamento não bloqueante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap" media="print" onload="this.media='all'">
@@ -93,8 +100,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <!-- Swiper CSS: carregado apenas no mobile -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="(max-width: 767px)" onload="this.media='all'">
+    <!-- Swiper CSS: injetado via JS apenas em mobile (< 768px) -->
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -135,7 +141,7 @@
             <div class="hero-container">
                 <!-- Ilustração lado esquerdo -->
                 <div class="hero-image" aria-label="Ilustração de personagem criativa voando em foguete com itens de papelaria">
-                    <img src="img/hero-illustration.webp" alt="Personagem criativa voando em foguete rodeada de itens de papelaria personalizada" class="hero-illustration" width="600" height="600">
+                    <img src="img/hero-illustration.webp" alt="Personagem criativa voando em foguete rodeada de itens de papelaria personalizada" class="hero-illustration" width="600" height="600" fetchpriority="high" loading="eager">
                 </div>
                 <!-- Texto lado direito -->
                 <div class="hero-text">
@@ -268,25 +274,37 @@
                 <div class="gallery-grid" role="list">
                     <div class="gallery-item" role="listitem">
                         <button class="gallery-btn" aria-label="Ampliar imagem: Kit festa completo com papelaria personalizada temática">
-                            <img src="img/caixinha-personalizada-roda-gigante-tema-confeitaria.webp" alt="Caixinha personalizada Roda Gigante para festa infantil com acabamento premium — Isa Criativa - Tema Confeitaria" class="gallery-img" loading="lazy">
+                            <img src="img/caixinha-personalizada-roda-gigante-tema-confeitaria.webp"
+                                 srcset="img/caixinha-personalizada-roda-gigante-tema-confeitaria.webp 800w"
+                                 sizes="(max-width: 1023px) 50vw, 25vw"
+                                 alt="Caixinha personalizada Roda Gigante para festa infantil com acabamento premium — Isa Criativa - Tema Confeitaria" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
                         </button>
                     </div>
                     <div class="gallery-item" role="listitem">
                         <button class="gallery-btn" aria-label="Ampliar imagem: Caixinha Milk personalizada para festa infantil">
-                            <img src="img/caixinha-personalizada-piramide-tema-vaquinha.webp" alt="Caixinha personalizada Pirâmide para festa infantil com acabamento premium — Isa Criativa - Tema Vaquinha" class="gallery-img" loading="lazy">
+                            <img src="img/caixinha-personalizada-piramide-tema-vaquinha.webp"
+                                 srcset="img/caixinha-personalizada-piramide-tema-vaquinha.webp 800w"
+                                 sizes="(max-width: 1023px) 50vw, 25vw"
+                                 alt="Caixinha personalizada Pirâmide para festa infantil com acabamento premium — Isa Criativa - Tema Vaquinha" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
                         </button>
                     </div>
                     <div class="gallery-item" role="listitem">
                         <button class="gallery-btn" aria-label="Ampliar imagem: Caixinha Cone personalizada com acabamento premium">
-                            <img src="img/chuteira-personalizada-tema-champions-league.webp" alt="Chuteira personalizada para festa infantil com acabamento premium — Isa Criativa - Tema Futebol" class="gallery-img" loading="lazy">
+                            <img src="img/chuteira-personalizada-tema-champions-league.webp"
+                                 srcset="img/chuteira-personalizada-tema-champions-league.webp 800w"
+                                 sizes="(max-width: 1023px) 50vw, 25vw"
+                                 alt="Chuteira personalizada para festa infantil com acabamento premium — Isa Criativa - Tema Futebol" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
                         </button>
                     </div>
                     <div class="gallery-item" role="listitem">
                         <button class="gallery-btn" aria-label="Ampliar imagem: Caixinhas temáticas personalizadas para lembrança de festa">
-                            <img src="img/caixinha-personalizada-milk-tema-confeitaria.webp" alt="Caixinha personalizada Milk para festa infantil com acabamento premium — Isa Criativa - Tema Confeitaria" class="gallery-img" loading="lazy">
+                            <img src="img/caixinha-personalizada-milk-tema-confeitaria.webp"
+                                 srcset="img/caixinha-personalizada-milk-tema-confeitaria.webp 800w"
+                                 sizes="(max-width: 1023px) 50vw, 25vw"
+                                 alt="Caixinha personalizada Milk para festa infantil com acabamento premium — Isa Criativa - Tema Confeitaria" class="gallery-img" loading="lazy">
                             <div class="gallery-overlay" aria-hidden="true"><span>Ampliar</span></div>
                         </button>
                     </div>
@@ -449,8 +467,7 @@
         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <!-- Swiper JS + script principal -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <!-- Script principal -->
     <script src="js/script.js" defer></script>
 </body>
 </html>
