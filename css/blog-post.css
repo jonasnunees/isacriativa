@@ -1,0 +1,1079 @@
+/* ==========================================================
+   blog-post.css
+   Isa Criativa | isacriativa.com.br
+
+   Índice:
+   1.  Reset (Meyer Reset v2.0)
+   2.  Design Tokens (:root)
+   3.  Base (html, body)
+   4.  Layout (.container, #post-body, .post-layout)
+   5.  Tipografia global (logo, a.logo)
+   6.  Header (#header, .header-content, .post-back-link)
+   7.  Hero do post (#post-hero)
+   8.  Conteúdo do artigo (.post-content)
+   9.  Bloco de destaque (.post-highlight)
+   10. CTA inline e CTA final (.post-cta-inline, #cta-final-post)
+   11. Botões (.cta-btn, .primary-btn, .secondary-btn, .btn-instagram)
+   12. FAQ (#faq-section)
+   13. Artigos relacionados (#artigos-relacionados)
+   14. Navegação entre posts (.post-nav)
+   15. Compartilhamento (.post-share)
+   16. Sidebar (.post-sidebar)
+   17. Footer
+   18. WhatsApp flutuante (.whatsapp-float)
+   19. Utilitários (.sr-only, .reveal)
+   20. Responsivo (media queries)
+   21. Acessibilidade (prefers-reduced-motion)
+   ========================================================== */
+
+
+/* ==========================================================
+   1. RESET — Meyer Reset v2.0 | meyerweb.com/eric/tools/css/reset/
+   ========================================================== */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* ==========================================================
+   2. DESIGN TOKENS
+   ========================================================== */
+:root {
+    /* --- Paleta principal --- */
+    --primary-color:      #f8bbd0; /* Rosa pastel — bordas, destaques suaves   */
+    --primary-dark:       #f06292; /* Rosa escuro — botões, links, ícones       */
+    --primary-deeper:     #c2185b; /* Rosa intenso — headings de destaque       */
+    --accent:             #e1bee7; /* Lilás pastel — numeração de steps, etc.   */
+
+    /* --- Cores de texto --- */
+    --text-dark:          #4a4a4a; /* Texto principal                           */
+    --text-light:         #7a7a7a; /* Texto secundário / descrições             */
+    --text-muted-on-dark: #cccccc; /* Texto discreto sobre fundos escuros       */
+
+    /* --- Fundos --- */
+    --bg-light:           #fffcfd; /* Fundo geral da página                     */
+    --bg-gray:            #fdfbfb; /* Fundo de cards e seções alternadas        */
+
+    /* --- Tipografia --- */
+    --font-main:          'Nunito', sans-serif;
+    --font-logo:          'Pacifico', cursive;
+
+    /* --- Gradiente de marca (rosa → roxo) --- */
+    --gradient-brand: linear-gradient(135deg, #c2185b 0%, #ad1457 50%, #7b1fa2 100%);
+
+    /* --- Transições --- */
+    --transition-speed:   0.3s;
+
+    /* --- Elementos específicos --- */
+    --color-whatsapp:          #25d366;
+    --header-height:           70px;
+
+    /* --- Tokens do template de post --- */
+    --color-post-cta-start:    #ad1457;
+    --color-post-cta-end:      #6a1b9a;
+    --color-instagram-start:   #f09433;
+    --color-instagram-mid1:    #e6683c;
+    --color-instagram-mid2:    #dc2743;
+    --color-instagram-mid3:    #cc2366;
+    --color-instagram-end:     #bc1888;
+    --color-faq-border:        rgba(240, 98, 146, 0.25);
+    --color-faq-hover:         #fff0f5;
+    --color-post-border:       rgba(0, 0, 0, 0.07);
+    --color-sidebar-cta-start: #ad1457;
+    --color-sidebar-cta-end:   #6a1b9a;
+}
+
+
+/* ==========================================================
+   3. BASE
+   ========================================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================
+   4. LAYOUT
+   ========================================================== */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#post-body {
+    padding: 70px 0 90px;
+    background-color: white;
+}
+
+.post-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+
+/* ==========================================================
+   5. TIPOGRAFIA GLOBAL (Logo)
+   ========================================================== */
+.logo,
+a.logo,
+a.logo:visited,
+a.logo:hover {
+    font-family: var(--font-logo);
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.logo:focus-visible,
+a.logo:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Links genéricos com foco visível */
+a:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+
+/* ==========================================================
+   6. HEADER
+   ========================================================== */
+#header,
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+/* Alias do logo usado nos posts */
+.post-header-logo {
+    text-decoration: none;
+}
+
+/* Link "← Voltar ao blog" */
+.post-back-link {
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color var(--transition-speed);
+}
+
+.post-back-link:hover {
+    color: var(--primary-dark);
+}
+
+
+/* ==========================================================
+   7. HERO DO POST
+   ========================================================== */
+#post-hero {
+    padding: 120px 0 0;
+    background: linear-gradient(135deg, #fff0f5 0%, #e0f7fa 100%);
+}
+
+.post-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 5% 60px;
+    text-align: center;
+}
+
+/* ---- Breadcrumb ---- */
+.post-breadcrumb {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    margin-bottom: 18px;
+}
+
+.post-breadcrumb a {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.post-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ---- Badge de categoria ---- */
+.post-category-badge {
+    display: inline-block;
+    background-color: var(--primary-dark);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+/* ---- Título ---- */
+.post-hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+/* ---- Meta: autor, data e tempo de leitura ---- */
+.post-hero-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.post-hero-meta i {
+    margin-right: 5px;
+    color: var(--primary-dark);
+}
+
+
+/* ==========================================================
+   8. CONTEÚDO DO ARTIGO
+   ========================================================== */
+
+/* Salvaguarda: impede que .reveal do global oculte o artigo sem JS */
+.post-content,
+.post-sidebar {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.post-content {
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: var(--text-dark);
+}
+
+.post-content h2 {
+    font-size: 1.65rem;
+    color: var(--primary-dark);
+    margin: 44px 0 16px;
+    line-height: 1.3;
+}
+
+.post-content h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin: 32px 0 12px;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+}
+
+.post-content ul,
+.post-content ol {
+    list-style: disc;
+    margin: 0 0 22px 24px;
+}
+
+.post-content ol {
+    list-style: decimal;
+}
+
+.post-content li {
+    margin-bottom: 9px;
+}
+
+.post-content strong {
+    color: var(--text-dark);
+}
+
+
+/* ==========================================================
+   9. BLOCO DE DESTAQUE
+   ========================================================== */
+.post-highlight {
+    background: linear-gradient(135deg, #fff0f5 0%, #e8f5e9 100%);
+    border-left: 4px solid var(--primary-dark);
+    border-radius: 0 14px 14px 0;
+    padding: 20px 26px;
+    margin: 32px 0;
+    font-style: italic;
+}
+
+
+/* ==========================================================
+   10. CTA INLINE E CTA FINAL
+   ========================================================== */
+
+/* ---- CTA inline (dentro do artigo) ---- */
+.post-cta-inline {
+    background: linear-gradient(
+        135deg,
+        var(--color-post-cta-start) 0%,
+        var(--color-post-cta-end) 100%
+    );
+    border-radius: 18px;
+    padding: 32px 30px;
+    text-align: center;
+    margin: 44px 0;
+}
+
+.post-cta-inline p {
+    color: white;
+    font-size: 1.08rem;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+/* ---- CTA final ---- */
+#cta-final-post {
+    margin-top: 54px;
+    background: linear-gradient(
+        135deg,
+        var(--color-post-cta-start) 0%,
+        var(--color-post-cta-end) 100%
+    );
+    border-radius: 22px;
+    padding: 42px 36px;
+    text-align: center;
+}
+
+#cta-final-post h2 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+#cta-final-post p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---- Grupo de botões do CTA final ---- */
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+}
+
+
+/* ==========================================================
+   11. BOTÕES
+   ========================================================== */
+.cta-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary-btn {
+    background-color: var(--primary-dark);
+    color: white;
+    box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(240, 98, 146, 0.4);
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--primary-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Botão Instagram ---- */
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-mid1),
+        var(--color-instagram-mid2),
+        var(--color-instagram-mid3),
+        var(--color-instagram-end)
+    );
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.btn-instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.28);
+}
+
+.btn-instagram:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+/* ---- Botões de compartilhamento ---- */
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.92rem;
+    transition: transform var(--transition-speed);
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+}
+
+.share-whatsapp {
+    background: var(--color-whatsapp);
+    color: white;
+}
+
+.share-instagram {
+    background: linear-gradient(
+        135deg,
+        var(--color-instagram-start),
+        var(--color-instagram-end)
+    );
+    color: white;
+}
+
+
+/* ==========================================================
+   12. FAQ
+   ========================================================== */
+#faq-section {
+    margin-top: 50px;
+}
+
+#faq-section h2 {
+    font-size: 1.65rem;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+}
+
+.faq-item {
+    border: 1px solid var(--color-faq-border);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px 22px;
+    text-align: left;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background-color var(--transition-speed);
+}
+
+.faq-question:hover {
+    background-color: var(--color-faq-hover);
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: -2px;
+}
+
+.faq-question i {
+    color: var(--primary-dark);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faq-question[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+/* ---- Resposta (accordion) ---- */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 22px;
+}
+
+.faq-answer.open {
+    max-height: 400px;
+    padding: 0 22px 20px;
+}
+
+.faq-answer p {
+    margin: 0;
+    color: var(--text-light);
+    line-height: 1.75;
+}
+
+
+/* ==========================================================
+   13. ARTIGOS RELACIONADOS
+   ========================================================== */
+#artigos-relacionados {
+    margin-top: 54px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-post-border);
+}
+
+#artigos-relacionados h2 {
+    font-size: 1.45rem;
+    color: var(--primary-dark);
+    margin-bottom: 22px;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.related-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-gray);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.related-card:focus-visible {
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 3px;
+}
+
+.related-card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.related-card-body {
+    padding: 14px 16px 18px;
+}
+
+.related-card-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+}
+
+.related-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   14. NAVEGAÇÃO ENTRE POSTS
+   ========================================================== */
+.post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 50px;
+    padding-top: 36px;
+    border-top: 1px solid var(--color-post-border);
+}
+
+.post-nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.post-nav-item.next {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.post-nav-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.post-nav-link {
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.post-nav-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   15. COMPARTILHAMENTO
+   ========================================================== */
+.post-share {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-post-border);
+}
+
+.post-share strong {
+    color: var(--text-dark);
+}
+
+
+/* ==========================================================
+   16. SIDEBAR
+   ========================================================== */
+.post-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ---- Widget base ---- */
+.sidebar-widget {
+    background-color: var(--bg-gray);
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-widget h3 {
+    font-size: 1rem;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* ---- Widget CTA (fundo degradê) ---- */
+.sidebar-cta {
+    background: linear-gradient(
+        135deg,
+        var(--color-sidebar-cta-start) 0%,
+        var(--color-sidebar-cta-end) 100%
+    );
+    border: none;
+    text-align: center;
+}
+
+.sidebar-cta h3 {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-cta p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.93rem;
+    margin-bottom: 16px;
+}
+
+.sidebar-cta-btn {
+    font-size: 0.92rem;
+    padding: 10px 20px;
+}
+
+/* ---- Widget Posts relacionados ---- */
+.sidebar-related {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sidebar-rel-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.sidebar-rel-item img {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.sidebar-rel-info a {
+    font-weight: 700;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.sidebar-rel-info a:hover {
+    color: var(--primary-dark);
+}
+
+.sidebar-rel-info span {
+    font-size: 0.78rem;
+    color: var(--text-light);
+}
+
+/* ---- Widget Tags ---- */
+.sidebar-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: var(--primary-color);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color var(--transition-speed);
+}
+
+.tag:hover {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+/* ---- Widget Instagram ---- */
+.sidebar-instagram {
+    text-align: center;
+}
+
+.sidebar-instagram-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.sidebar-instagram .btn-instagram {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+}
+
+
+/* ==========================================================
+   17. FOOTER
+   ========================================================== */
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-muted-on-dark);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.footer-brand .logo {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.footer-brand p {
+    font-size: 0.95rem;
+    color: var(--text-muted-on-dark);
+    margin-top: 8px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-social a {
+    color: var(--text-muted-on-dark);
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.footer-social a:hover {
+    color: var(--primary-dark);
+}
+
+.footer-social a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-muted-on-dark);
+}
+
+.footer-privacy-link {
+    color: var(--text-muted-on-dark);
+    text-decoration: underline;
+}
+
+.footer-privacy-link:hover {
+    color: white;
+}
+
+
+/* ==========================================================
+   18. WHATSAPP FLUTUANTE
+   ========================================================== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--color-whatsapp);
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: transform var(--transition-speed);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   19. UTILITÁRIOS
+   ========================================================== */
+
+/* Visível apenas para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Scroll reveal — elementos entram em tela via JS (.active) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   20. RESPONSIVO
+   ========================================================== */
+
+/* Sidebar ao lado em telas maiores */
+@media (min-width: 900px) {
+    .post-layout {
+        grid-template-columns: 1fr 310px;
+        align-items: start;
+    }
+}
+
+/* Grid de artigos relacionados em telas médias */
+@media (min-width: 600px) {
+    .related-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Footer em linha em telas médias */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 500px) {
+    .post-hero-title {
+        font-size: 1.85rem;
+    }
+
+    .post-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .post-nav-item.next {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    #cta-final-post {
+        padding: 32px 22px;
+    }
+}
+
+
+/* ==========================================================
+   21. ACESSIBILIDADE — prefers-reduced-motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal,
+    .whatsapp-float,
+    .faq-answer,
+    .faq-question i,
+    .related-card,
+    .share-btn,
+    .btn-instagram {
+        transition: none;
+    }
+}
